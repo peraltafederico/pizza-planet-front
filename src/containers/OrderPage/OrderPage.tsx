@@ -2,6 +2,7 @@ import React, { FC, useState, useEffect } from 'react'
 import { Header } from '../../components/Header'
 import { OptionsList } from '../../components/OptionsList'
 import { mockPizzasOption } from '../../mocks'
+import { Order } from '../../components/Order'
 import { OrderItem } from '../../interfaces'
 
 export const OrderPage: FC = () => {
@@ -42,6 +43,7 @@ export const OrderPage: FC = () => {
         handleClickMinus={handleClickMinus}
         title="CHOSE YOUR ORDER"
       />
+      <Order title="YOUR ORDER" items={orderItems} />
     </>
   )
 }
