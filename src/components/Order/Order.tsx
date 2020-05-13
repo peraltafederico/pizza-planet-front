@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import * as Styled from './Order.styles'
 import { OrderItem } from '../../interfaces'
 import { Section } from '../Section'
+import { Button } from '../Button'
 
 interface Order {
   title: string
@@ -28,10 +29,10 @@ export const Order: FC<Order> = ({ title, items, totalPrice }: Order) => (
       </>
     ))}
     <Styled.TotalContainer>
-      <Styled.Total>
-        <span>TOTAL PRICE:{'   '}</span>
-        {totalPrice}
-      </Styled.Total>
+      <Styled.Total> TOTAL PRICE: {totalPrice}</Styled.Total>
     </Styled.TotalContainer>
+    <Styled.ButtonContainer>
+      <Button text="ACCEPT" />
+    </Styled.ButtonContainer>
   </Section>
 )

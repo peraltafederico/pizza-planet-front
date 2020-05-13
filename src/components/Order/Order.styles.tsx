@@ -46,3 +46,7 @@ export const TotalContainer = styled.div`
 export const Total = styled.span`
   font-weight: bold;
 `
+
+export const ButtonContainer = styled.div`
+  margin: 20px;
+`
