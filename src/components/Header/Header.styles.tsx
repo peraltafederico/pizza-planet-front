@@ -10,7 +10,7 @@ export const Container = styled.div`
   position: relative;
 `
 export const ShoppingCartIcon = styled(FontAwesomeIcon)`
-  color: #fff7bf;
+  color: ${(props): string => props.theme.textColor};
   font-size: 22px;
   cursor: pointer;
   position: absolute;
@@ -23,13 +23,12 @@ export const TitleContainer = styled.div`
 `
 
 export const Title = styled.h1`
-  color: #fff7bf;
+  color: ${(props): string => props.theme.textColor};
   margin: 0;
 `
 
 export const CounterContainer = styled.div`
   background-color: rgb(245, 67, 54, 0.8);
-  color: black;
   width: 15px;
   height: 15px;
   border-radius: 50%;
