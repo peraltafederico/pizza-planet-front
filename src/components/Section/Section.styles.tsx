@@ -2,7 +2,7 @@ import styled, { DefaultTheme } from 'styled-components'
 import { SectionVariant } from '../../types'
 
 export const Container = styled.div`
-  min-height: 350px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   background-color: ${(props: { theme: DefaultTheme; color: SectionVariant }): string =>

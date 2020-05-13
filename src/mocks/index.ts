@@ -1,34 +1,66 @@
 export const mockPizzasOption = [
   {
     name: 'Peperoni',
-    amount: 2,
+    amount: 0,
+    prices: {
+      usd: 159,
+      eur: 175,
+    },
   },
   {
     name: 'Muzzarella',
-    amount: 4,
+    amount: 0,
+    prices: {
+      usd: 159,
+      eur: 175,
+    },
   },
   {
     name: 'Crazy house',
-    amount: 7,
+    amount: 0,
+    prices: {
+      usd: 159,
+      eur: 175,
+    },
   },
   {
     name: 'Caprichosa',
-    amount: 8,
+    amount: 0,
+    prices: {
+      usd: 159,
+      eur: 175,
+    },
   },
   {
     name: 'Clasicc',
-    amount: 1,
+    amount: 0,
+    prices: {
+      usd: 159,
+      eur: 175,
+    },
   },
   {
     name: 'Something',
-    amount: 6,
+    amount: 0,
+    prices: {
+      usd: 159,
+      eur: 175,
+    },
   },
   {
     name: 'Another',
-    amount: 2,
+    amount: 0,
+    prices: {
+      usd: 159,
+      eur: 175,
+    },
   },
   {
     name: 'The last one',
-    amount: 1,
+    amount: 0,
+    prices: {
+      usd: 159,
+      eur: 175,
+    },
   },
 ]

@@ -7,8 +7,7 @@ export const Title = styled.h2`
 `
 
 export const ItemsContainer = styled.div`
-  width: 300px;
-  justify-content: space-between;
+  width: 400px;
   display: flex;
   margin-bottom: 10px;
 `
@@ -19,8 +18,15 @@ export const TextContainer = styled.div`
   flex: 1;
 `
 
+export const AmountContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex: 1;
+`
+
 export const PriceContainer = styled.div`
   display: flex;
+  flex: 1;
   justify-content: center;
   width: 75px;
 `
@@ -31,4 +37,12 @@ export const Text = styled.span`
 
 export const Price = styled.span`
   font-size: 18px;
+`
+
+export const TotalContainer = styled.div`
+  margin-top: 25px;
+`
+
+export const Total = styled.span`
+  font-weight: bold;
 `
