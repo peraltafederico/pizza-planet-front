@@ -33,14 +33,14 @@ export const PlusIcon = styled(FontAwesomeIcon)`
   cursor: pointer;
 `
 
-export const TextContainer = styled.div`
+export const NameContainer = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
   font-size: 18px;
 `
 
-export const Text = styled.span`
+export const Name = styled.span`
   color: ${(props): string => props.theme.colors.black};
 `
 

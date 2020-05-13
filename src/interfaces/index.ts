@@ -1,5 +1,5 @@
 export interface OrderItem {
-  text: string
+  name: string
   price: number
   amount: number
 }

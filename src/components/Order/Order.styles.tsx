@@ -12,7 +12,7 @@ export const ItemsContainer = styled.div`
   margin-bottom: 10px;
 `
 
-export const TextContainer = styled.div`
+export const NameContainer = styled.div`
   display: flex;
   justify-content: center;
   flex: 1;
@@ -31,7 +31,7 @@ export const PriceContainer = styled.div`
   width: 75px;
 `
 
-export const Text = styled.span`
+export const Name = styled.span`
   font-size: 18px;
 `
 

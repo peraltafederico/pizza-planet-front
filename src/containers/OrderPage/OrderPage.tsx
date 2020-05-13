@@ -20,7 +20,7 @@ export const OrderPage: FC = () => {
         totalPrice += price
 
         return {
-          text: option.name,
+          name: option.name,
           price,
           amount: option.amount,
         }

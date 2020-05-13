@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import * as Styled from './Choice.styles'
-import { Option } from './Option'
 import { Section } from '../Section'
 
 interface Choice {
@@ -24,9 +23,9 @@ export const Choice: FC<Choice> = ({
     <Styled.OptionsContainer>
       {options.map((option, index) => (
         <Styled.Container key={`${option.name}${index}`}>
-          <Styled.TextContainer>
-            <Styled.Text>{option.name}</Styled.Text>
-          </Styled.TextContainer>
+          <Styled.NameContainer>
+            <Styled.Name>{option.name}</Styled.Name>
+          </Styled.NameContainer>
           <Styled.AmountContainer>
             <Styled.LessIcon onClick={(): void => handleClickMinus(index)} icon={faMinus} />
             <Styled.Amount>{option.amount}</Styled.Amount>
