@@ -4,13 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export const Container = styled.div`
   width: 100%;
   height: 65px;
-  background-color: ${(props): string => props.theme.background};
+  background-color: ${(props): string => props.theme.colors.green};
   display: flex;
   align-items: center;
   position: relative;
 `
 export const ShoppingCartIcon = styled(FontAwesomeIcon)`
-  color: ${(props): string => props.theme.textColor};
+  color: ${(props): string => props.theme.colors.white};
   font-size: 22px;
   cursor: pointer;
   position: absolute;
@@ -23,7 +23,7 @@ export const TitleContainer = styled.div`
 `
 
 export const Title = styled.h1`
-  color: ${(props): string => props.theme.textColor};
+  color: ${(props): string => props.theme.colors.white};
   margin: 0;
 `
 

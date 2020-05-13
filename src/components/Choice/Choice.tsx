@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
-import * as Styled from './OptionsList.styles'
-import { Option } from '../Option'
+import * as Styled from './Choice.styles'
+import { Option } from './Option'
+import { Section } from '../Section'
 
-interface OptionsList {
+interface Choice {
   title: string
   handleClickMinus: (index: number) => void
   handleClickPlus: (index: number) => void
@@ -12,14 +13,13 @@ interface OptionsList {
   }[]
 }
 
-export const OptionsList: FC<OptionsList> = ({
+export const Choice: FC<Choice> = ({
   title,
   handleClickMinus,
   handleClickPlus,
   options,
-}: OptionsList) => (
-  <Styled.Container>
-    <Styled.Title>{title}</Styled.Title>
+}: Choice) => (
+  <Section title={title} variant="lightGreen">
     <Styled.OptionsContainer>
       {options.map((option, index) => (
         <Option
@@ -32,5 +32,5 @@ export const OptionsList: FC<OptionsList> = ({
         />
       ))}
     </Styled.OptionsContainer>
-  </Styled.Container>
+  </Section>
 )

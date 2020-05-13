@@ -9,13 +9,13 @@ export const Container = styled.div`
 `
 
 export const LessIcon = styled(FontAwesomeIcon)`
-  color: blue;
+  color: ${(props): string => props.theme.colors.blue};
   margin: 0 8px;
   cursor: pointer;
 `
 
 export const PlusIcon = styled(FontAwesomeIcon)`
-  color: red;
+  color: ${(props): string => props.theme.colors.red};
   margin: 0 8px;
   cursor: pointer;
 `
@@ -28,11 +28,11 @@ export const TextContainer = styled.div`
 `
 
 export const Text = styled.span`
-  color: black;
+  color: ${(props): string => props.theme.colors.black};
 `
 
 export const Amount = styled.span`
-  color: black;
+  color: ${(props): string => props.theme.colors.black};
   font-size: 18px;
 `
 
