@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import * as Styled from './OptionsList.styles'
 import { Option } from '../Option'
+import { Section } from '../Section'
 
 interface OptionsList {
   title: string
@@ -18,8 +19,7 @@ export const OptionsList: FC<OptionsList> = ({
   handleClickPlus,
   options,
 }: OptionsList) => (
-  <Styled.Container>
-    <Styled.Title>{title}</Styled.Title>
+  <Section title={title} variant="lightGreen">
     <Styled.OptionsContainer>
       {options.map((option, index) => (
         <Option
@@ -32,5 +32,5 @@ export const OptionsList: FC<OptionsList> = ({
         />
       ))}
     </Styled.OptionsContainer>
-  </Styled.Container>
+  </Section>
 )

@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import * as Styled from './Order.styles'
 import { OrderItem } from '../../interfaces'
+import { Section } from '../Section'
 
 interface Order {
   title: string
@@ -8,8 +9,7 @@ interface Order {
 }
 
 export const Order: FC<Order> = ({ title, items }: Order) => (
-  <Styled.Container>
-    <Styled.Title>{title}</Styled.Title>
+  <Section title={title} variant="green">
     {(items.length > 0 ? items : []).map((item) => (
       <>
         <Styled.ItemsContainer>
@@ -22,5 +22,5 @@ export const Order: FC<Order> = ({ title, items }: Order) => (
         </Styled.ItemsContainer>
       </>
     ))}
-  </Styled.Container>
+  </Section>
 )
