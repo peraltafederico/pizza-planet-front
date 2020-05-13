@@ -12,7 +12,7 @@ export const Container = styled.div`
 `
 
 export const Title = styled.h2`
-  color: black;
+  color: ${(props): string => props.theme.colors.black};
   align-self: flex-start;
   margin-bottom: 8px;
 `
