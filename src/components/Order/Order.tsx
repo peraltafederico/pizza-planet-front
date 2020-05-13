@@ -13,6 +13,7 @@ export const Order: FC<Order> = ({ title, items, totalPrice }: Order) => (
   <Section title={title} variant="green">
     {(items.length > 0 ? items : []).map((item) => (
       <>
+        {/* // TODO: create grid component */}
         <Styled.ItemsContainer>
           <Styled.NameContainer>
             <Styled.Name>{item.name}</Styled.Name>

@@ -9,10 +9,8 @@ export const Title = styled.h2`
 
 export const OptionsContainer = styled.div`
   position: relative;
-  width: 300px;
+  width: 400px;
 `
-
-// import styled from 'styled-components'
 
 export const Container = styled.div`
   height: 25px;
@@ -37,11 +35,11 @@ export const NameContainer = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
-  font-size: 18px;
 `
 
 export const Name = styled.span`
   color: ${(props): string => props.theme.colors.black};
+  font-size: 18px;
 `
 
 export const Amount = styled.span`

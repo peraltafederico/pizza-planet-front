@@ -3,3 +3,12 @@ export interface OrderItem {
   price: number
   amount: number
 }
+
+export interface PizzasOption {
+  name: string
+  amount: number
+  prices: {
+    usd: number
+    eur: number
+  }
+}

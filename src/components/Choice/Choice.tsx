@@ -2,15 +2,13 @@ import React, { FC } from 'react'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import * as Styled from './Choice.styles'
 import { Section } from '../Section'
+import { PizzasOption } from '../../interfaces'
 
 interface Choice {
   title: string
   handleClickMinus: (index: number) => void
   handleClickPlus: (index: number) => void
-  options: {
-    amount: number
-    name: string
-  }[]
+  options: PizzasOption[]
 }
 
 export const Choice: FC<Choice> = ({
@@ -20,11 +18,17 @@ export const Choice: FC<Choice> = ({
   options,
 }: Choice) => (
   <Section title={title} variant="lightGreen">
+    {/* // TODO: create grid component */}
     <Styled.OptionsContainer>
       {options.map((option, index) => (
         <Styled.Container key={`${option.name}${index}`}>
           <Styled.NameContainer>
             <Styled.Name>{option.name}</Styled.Name>
+          </Styled.NameContainer>
+          <Styled.NameContainer>
+            <Styled.Name>
+              ${option.prices.usd} or €{option.prices.eur}{' '}
+            </Styled.Name>
           </Styled.NameContainer>
           <Styled.AmountContainer>
             <Styled.LessIcon onClick={(): void => handleClickMinus(index)} icon={faMinus} />
