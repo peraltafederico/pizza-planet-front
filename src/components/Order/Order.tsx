@@ -8,9 +8,10 @@ interface Order {
   title: string
   items: OrderItem[]
   totalPrices: TotalPrices
+  onClickAccept: () => void
 }
 
-export const Order: FC<Order> = ({ title, items, totalPrices }: Order) => (
+export const Order: FC<Order> = ({ title, items, totalPrices, onClickAccept }: Order) => (
   <Section title={title} variant="green">
     {(items.length > 0 ? items : []).map((item) => (
       <>
@@ -36,7 +37,7 @@ export const Order: FC<Order> = ({ title, items, totalPrices }: Order) => (
       </Styled.Total>
     </Styled.TotalContainer>
     <Styled.ButtonContainer>
-      <Button text="ACCEPT" />
+      <Button text="ACCEPT" onClick={onClickAccept} />
     </Styled.ButtonContainer>
   </Section>
 )
