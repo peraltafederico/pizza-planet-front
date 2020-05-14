@@ -3,30 +3,39 @@ import { Header } from '../../components/Header'
 import { Choice } from '../../components/Choice'
 import { mockPizzasOption } from '../../mocks'
 import { Order } from '../../components/Order'
-import { OrderItem } from '../../interfaces'
+import { OrderItem, TotalPrices } from '../../interfaces'
 
 export const OrderPage: FC = () => {
   const [pizzasOption, setPizzasOption] = useState(mockPizzasOption)
   const [orderItems, setOrderItems] = useState({} as OrderItem[])
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalPrices, setTotalPrices] = useState({} as TotalPrices)
 
   useEffect(() => {
-    let totalPrice = 0
+    const totalPrices = {
+      totalUsd: 0,
+      totalEur: 0,
+    }
 
     const orderItems = pizzasOption
       .filter((option) => option.amount > 0)
       .map((option) => {
-        const price = option.prices.eur * option.amount
-        totalPrice += price
+        const usdPrice = option.prices.usd * option.amount
+        const eurPrice = option.prices.eur * option.amount
+
+        totalPrices.totalEur += eurPrice
+        totalPrices.totalUsd += usdPrice
 
         return {
           name: option.name,
-          price,
+          prices: {
+            eur: option.prices.eur * option.amount,
+            usd: option.prices.usd * option.amount,
+          },
           amount: option.amount,
         }
       })
 
-    setTotalPrice(totalPrice)
+    setTotalPrices(totalPrices)
     setOrderItems(orderItems)
   }, [pizzasOption])
 
@@ -56,7 +65,7 @@ export const OrderPage: FC = () => {
         handleClickMinus={handleClickMinus}
         title="CHOSE YOUR ORDER"
       />
-      <Order title="YOUR ORDER" items={orderItems} totalPrice={totalPrice} />
+      <Order title="YOUR ORDER" items={orderItems} totalPrices={totalPrices} />
     </>
   )
 }

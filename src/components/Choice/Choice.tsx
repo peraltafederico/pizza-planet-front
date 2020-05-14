@@ -2,13 +2,13 @@ import React, { FC } from 'react'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import * as Styled from './Choice.styles'
 import { Section } from '../Section'
-import { PizzasOption } from '../../interfaces'
+import { OrderItem } from '../../interfaces'
 
 interface Choice {
   title: string
   handleClickMinus: (index: number) => void
   handleClickPlus: (index: number) => void
-  options: PizzasOption[]
+  options: OrderItem[]
 }
 
 export const Choice: FC<Choice> = ({
@@ -27,7 +27,7 @@ export const Choice: FC<Choice> = ({
           </Styled.NameContainer>
           <Styled.NameContainer>
             <Styled.Name>
-              ${option.prices.usd} or €{option.prices.eur}{' '}
+              ${option.prices.usd} / €{option.prices.eur}{' '}
             </Styled.Name>
           </Styled.NameContainer>
           <Styled.AmountContainer>
