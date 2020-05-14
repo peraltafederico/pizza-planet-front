@@ -11,3 +11,9 @@ export interface TotalPrices {
   totalUsd: number
   totalEur: number
 }
+
+export interface ClientData {
+  name: string
+  phone: string
+  address: string
+}
