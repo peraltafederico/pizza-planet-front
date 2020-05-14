@@ -25,6 +25,6 @@ const App: FC = () => {
       </Router>
     </ThemeProvider>
   )
-}
+} 
 
 export default App

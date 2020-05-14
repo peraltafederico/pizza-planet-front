@@ -1,16 +1,14 @@
 import React, { FC } from 'react'
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import * as Styled from './Choice.styles'
-import { Option } from './Option'
 import { Section } from '../Section'
+import { OrderItem } from '../../interfaces'
 
 interface Choice {
   title: string
   handleClickMinus: (index: number) => void
   handleClickPlus: (index: number) => void
-  options: {
-    amount: number
-    name: string
-  }[]
+  options: OrderItem[]
 }
 
 export const Choice: FC<Choice> = ({
@@ -20,16 +18,24 @@ export const Choice: FC<Choice> = ({
   options,
 }: Choice) => (
   <Section title={title} variant="lightGreen">
+    {/* // TODO: create grid component */}
     <Styled.OptionsContainer>
       {options.map((option, index) => (
-        <Option
-          key={`${option.name}${index}`}
-          handleClickMinus={handleClickMinus}
-          handleClickPlus={handleClickPlus}
-          text={option.name}
-          amount={option.amount}
-          index={index}
-        />
+        <Styled.Container key={`${option.name}${index}`}>
+          <Styled.NameContainer>
+            <Styled.Name>{option.name}</Styled.Name>
+          </Styled.NameContainer>
+          <Styled.NameContainer>
+            <Styled.Name>
+              ${option.prices.usd} / €{option.prices.eur}{' '}
+            </Styled.Name>
+          </Styled.NameContainer>
+          <Styled.AmountContainer>
+            <Styled.LessIcon onClick={(): void => handleClickMinus(index)} icon={faMinus} />
+            <Styled.Amount>{option.amount}</Styled.Amount>
+            <Styled.PlusIcon onClick={(): void => handleClickPlus(index)} icon={faPlus} />
+          </Styled.AmountContainer>
+        </Styled.Container>
       ))}
     </Styled.OptionsContainer>
   </Section>

@@ -1,36 +1,42 @@
 import React, { FC } from 'react'
 import * as Styled from './Order.styles'
-import { OrderItem } from '../../interfaces'
+import { OrderItem, TotalPrices } from '../../interfaces'
 import { Section } from '../Section'
+import { Button } from '../Button'
 
 interface Order {
   title: string
   items: OrderItem[]
-  totalPrice: number
+  totalPrices: TotalPrices
 }
 
-export const Order: FC<Order> = ({ title, items, totalPrice }: Order) => (
+export const Order: FC<Order> = ({ title, items, totalPrices }: Order) => (
   <Section title={title} variant="green">
     {(items.length > 0 ? items : []).map((item) => (
       <>
+        {/* // TODO: create grid component */}
         <Styled.ItemsContainer>
-          <Styled.TextContainer>
-            <Styled.Text>{item.text}</Styled.Text>
-          </Styled.TextContainer>
+          <Styled.NameContainer>
+            <Styled.Name>{item.name}</Styled.Name>
+          </Styled.NameContainer>
           <Styled.AmountContainer>
-            <Styled.Text>* {item.amount}</Styled.Text>
+            <Styled.Name>* {item.amount}</Styled.Name>
           </Styled.AmountContainer>
           <Styled.PriceContainer>
-            <Styled.Price>${item.price}</Styled.Price>
+            <Styled.Price>
+              ${item.prices.usd} / €{item.prices.eur}
+            </Styled.Price>
           </Styled.PriceContainer>
         </Styled.ItemsContainer>
       </>
     ))}
     <Styled.TotalContainer>
       <Styled.Total>
-        <span>TOTAL PRICE:{'   '}</span>
-        {totalPrice}
+        TOTAL PRICE: ${totalPrices.totalUsd} / €{totalPrices.totalEur}
       </Styled.Total>
     </Styled.TotalContainer>
+    <Styled.ButtonContainer>
+      <Button text="ACCEPT" />
+    </Styled.ButtonContainer>
   </Section>
 )
