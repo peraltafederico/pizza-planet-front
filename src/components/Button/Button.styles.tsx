@@ -6,7 +6,7 @@ export const Button = styled.div`
   background-color: ${(props): string => props.theme.colors.red};
   cursor: pointer;
   border-radius: 40px;
-  box-shadow: ${(props): string => `0px 0px 8px 0.5px ${props.theme.colors.white}`};
+  box-shadow: ${(props): string => `0px 0px 8px 0.5px ${props.theme.colors.black}`};
 `
 
 export const Text = styled.span`

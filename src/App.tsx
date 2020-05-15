@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components'
 import { OrderPage } from './containers/OrderPage'
 import { theme } from './theme'
 import GlobalStyles from './globalStyles'
+import { ConfirmPage } from './containers/ConfirmPage'
 
 const App: FC = () => {
   return (
@@ -15,7 +16,7 @@ const App: FC = () => {
             <OrderPage />
           </Route>
           <Route path="/confirm">
-            <div>confirm</div>
+            <ConfirmPage />
           </Route>
           <Route path="/cart">
             <div>cart</div>
@@ -25,6 +26,6 @@ const App: FC = () => {
       </Router>
     </ThemeProvider>
   )
-} 
+}
 
 export default App

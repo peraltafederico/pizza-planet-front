@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Header } from '../../components/Header'
 import { Choice } from '../../components/Choice'
 import { mockPizzasOption } from '../../mocks'
@@ -9,6 +10,7 @@ export const OrderPage: FC = () => {
   const [pizzasOption, setPizzasOption] = useState(mockPizzasOption)
   const [orderItems, setOrderItems] = useState({} as OrderItem[])
   const [totalPrices, setTotalPrices] = useState({} as TotalPrices)
+  const history = useHistory()
 
   useEffect(() => {
     const totalPrices = {
@@ -56,6 +58,8 @@ export const OrderPage: FC = () => {
     setPizzasOption(newPizzasOption)
   }
 
+  const handleClickAccept = (): void => history.push('/confirm', { orderItems, totalPrices })
+
   return (
     <>
       <Header title="PIZZA PLANET!" counter="5" />
@@ -65,7 +69,12 @@ export const OrderPage: FC = () => {
         handleClickMinus={handleClickMinus}
         title="CHOSE YOUR ORDER"
       />
-      <Order title="YOUR ORDER" items={orderItems} totalPrices={totalPrices} />
+      <Order
+        title="YOUR ORDER"
+        items={orderItems}
+        totalPrices={totalPrices}
+        onClickAccept={handleClickAccept}
+      />
     </>
   )
 }
