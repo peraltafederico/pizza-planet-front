@@ -58,7 +58,7 @@ export const OrderPage: FC = () => {
     setPizzasOption(newPizzasOption)
   }
 
-  const handleClickAccept = (): void => history.push('/confirm')
+  const handleClickAccept = (): void => history.push('/confirm', { orderItems, totalPrices })
 
   return (
     <>

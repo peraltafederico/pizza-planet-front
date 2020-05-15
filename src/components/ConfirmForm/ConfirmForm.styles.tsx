@@ -5,3 +5,7 @@ export const InputContainer = styled.div`
     margin-bottom: 30px;
   }
 `
+
+export const ButtonContainer = styled.div`
+  margin: 20px;
+`
