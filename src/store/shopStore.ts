@@ -3,10 +3,12 @@ import { createContext } from 'react'
 import { Item, Order, TotalPrices } from '../interfaces'
 
 class ShopStore {
-  @observable shopCart: Order[] = []
+  @observable shopCart: Order[] = JSON.parse(localStorage.getItem('orders') || '[]')
 
   @action addOrder = ({ items, totalPrices }: Order): void => {
     this.shopCart.push({ items, totalPrices })
+
+    localStorage.setItem('orders', JSON.stringify(this.orders))
   }
 
   @computed get orders(): { items: Item[]; totalPrices: TotalPrices }[] {
