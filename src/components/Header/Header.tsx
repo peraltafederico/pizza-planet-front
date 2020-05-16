@@ -4,7 +4,7 @@ import * as Styled from './Header.styles'
 
 export interface Header {
   title: string
-  counter: string
+  counter: number
 }
 
 export const Header: FC<Header> = ({ title, counter }: Header) => (

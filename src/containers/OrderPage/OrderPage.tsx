@@ -1,16 +1,19 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
 import { Header } from '../../components/Header'
 import { Choice } from '../../components/Choice'
 import { mockPizzasOption } from '../../mocks'
 import { Order } from '../../components/Order'
 import { OrderItem, TotalPrices } from '../../interfaces'
+import shopStore from '../../store/shopStore'
 
-export const OrderPage: FC = () => {
+export const OrderPage: FC = observer(() => {
   const [pizzasOption, setPizzasOption] = useState(mockPizzasOption)
   const [orderItems, setOrderItems] = useState({} as OrderItem[])
   const [totalPrices, setTotalPrices] = useState({} as TotalPrices)
   const history = useHistory()
+  const { addOrder, orders, totalOrders } = useContext(shopStore)
 
   useEffect(() => {
     const totalPrices = {
@@ -58,11 +61,14 @@ export const OrderPage: FC = () => {
     setPizzasOption(newPizzasOption)
   }
 
-  const handleClickAccept = (): void => history.push('/confirm', { orderItems, totalPrices })
+  const handleClickAccept = (): void => {
+    addOrder(orderItems)
+    history.push('/confirm', { orderItems, totalPrices })
+  }
 
   return (
     <>
-      <Header title="PIZZA PLANET!" counter="5" />
+      <Header title="PIZZA PLANET!" counter={totalOrders} />
       <Choice
         options={mockPizzasOption}
         handleClickPlus={handleClickPlus}
@@ -77,4 +83,4 @@ export const OrderPage: FC = () => {
       />
     </>
   )
-}
+})
