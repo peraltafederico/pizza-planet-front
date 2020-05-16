@@ -6,6 +6,7 @@ import { ConfirmForm } from '../../components/ConfirmForm'
 import { ClientData, Item, TotalPrices } from '../../interfaces'
 import { Order } from '../../components/Order'
 import shopStore from '../../store/shopStore'
+import { Section } from '../../components/Section'
 
 interface ConfirmPageState {
   items?: Item[]
@@ -31,17 +32,20 @@ export const ConfirmPage: FC = observer(() => {
       {history.location.state?.items && history.location.state?.totalPrices ? (
         <>
           <Header title="PIZZA PLANET!" counter={totalOrders} />
-          <ConfirmForm
-            onChange={handleOnChangeForm}
-            data={clientData}
-            onClickAccept={handleClickConfirm}
-          />
-          <Order
-            title="YOUR ORDER"
-            items={history.location.state?.items}
-            totalPrices={history.location.state?.totalPrices}
-            hideButton={true}
-          />
+          <Section variant="lightGreen" title="CONFIRM FORM">
+            <ConfirmForm
+              onChange={handleOnChangeForm}
+              data={clientData}
+              onClickAccept={handleClickConfirm}
+            />
+          </Section>
+          <Section variant="green" title="YOUR ORDER">
+            <Order
+              items={history.location.state?.items}
+              totalPrices={history.location.state?.totalPrices}
+              hideButton={true}
+            />
+          </Section>
         </>
       ) : (
         history.push('/')

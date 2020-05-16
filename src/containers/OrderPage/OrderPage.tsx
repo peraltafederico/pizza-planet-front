@@ -7,6 +7,7 @@ import { mockPizzasOption } from '../../mocks'
 import { Order } from '../../components/Order'
 import { Item, TotalPrices } from '../../interfaces'
 import shopStore from '../../store/shopStore'
+import { Section } from '../../components/Section'
 
 export const OrderPage: FC = observer(() => {
   const [option, setOption] = useState(mockPizzasOption)
@@ -69,18 +70,16 @@ export const OrderPage: FC = observer(() => {
   return (
     <>
       <Header title="PIZZA PLANET!" counter={totalOrders} />
-      <Choice
-        options={mockPizzasOption}
-        handleClickPlus={handleClickPlus}
-        handleClickMinus={handleClickMinus}
-        title="CHOSE YOUR ORDER"
-      />
-      <Order
-        title="YOUR ORDER"
-        items={items}
-        totalPrices={totalPrices}
-        onClickAccept={handleClickAccept}
-      />
+      <Section variant="lightGreen" title="CHOSE YOUR ORDER">
+        <Choice
+          options={mockPizzasOption}
+          handleClickPlus={handleClickPlus}
+          handleClickMinus={handleClickMinus}
+        />
+      </Section>
+      <Section variant="green" title="YOUR ORDER">
+        <Order items={items} totalPrices={totalPrices} onClickAccept={handleClickAccept} />
+      </Section>
     </>
   )
 })
