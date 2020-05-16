@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 import * as Styled from './Order.styles'
-import { OrderItem, TotalPrices } from '../../interfaces'
+import { Item, TotalPrices } from '../../interfaces'
 import { Section } from '../Section'
 import { Button } from '../Button'
 
 interface Order {
   title: string
-  items: OrderItem[]
+  items: Item[]
   totalPrices: TotalPrices
   onClickAccept?: () => void
   hideButton?: boolean
