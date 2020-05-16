@@ -5,6 +5,7 @@ import { OrderPage } from './containers/OrderPage'
 import { theme } from './theme'
 import GlobalStyles from './globalStyles'
 import { ConfirmPage } from './containers/ConfirmPage'
+import { ShopCartPage } from './containers/ShopChartPage'
 
 const App: FC = () => {
   return (
@@ -12,14 +13,14 @@ const App: FC = () => {
       <GlobalStyles />
       <Router>
         <Switch>
-          <Route path="/order">
+          <Route path="/order/:id?">
             <OrderPage />
           </Route>
           <Route path="/confirm">
             <ConfirmPage />
           </Route>
-          <Route path="/cart">
-            <div>cart</div>
+          <Route path="/shop-cart">
+            <ShopCartPage />
           </Route>
           <Redirect from="*" to="/order" />
         </Switch>

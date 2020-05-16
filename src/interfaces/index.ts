@@ -1,4 +1,4 @@
-export interface OrderItem {
+export interface Item {
   name: string
   prices: {
     usd: number
@@ -16,4 +16,9 @@ export interface ClientData {
   name: string
   phone: string
   address: string
+}
+
+export interface Order {
+  items: Item[]
+  totalPrices: TotalPrices
 }

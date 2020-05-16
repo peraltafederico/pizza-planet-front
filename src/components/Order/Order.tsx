@@ -1,25 +1,23 @@
 import React, { FC } from 'react'
 import * as Styled from './Order.styles'
-import { OrderItem, TotalPrices } from '../../interfaces'
+import { Item, TotalPrices } from '../../interfaces'
 import { Section } from '../Section'
 import { Button } from '../Button'
 
 interface Order {
-  title: string
-  items: OrderItem[]
+  items: Item[]
   totalPrices: TotalPrices
   onClickAccept?: () => void
   hideButton?: boolean
 }
 
 export const Order: FC<Order> = ({
-  title,
   items,
   totalPrices,
   onClickAccept = (): void => {},
   hideButton,
 }: Order) => (
-  <Section title={title} variant="green">
+  <>
     {(items.length > 0 ? items : []).map((item) => (
       <Styled.ItemsContainer key={item.name}>
         <Styled.NameContainer>
@@ -45,7 +43,7 @@ export const Order: FC<Order> = ({
         <Button text="ACCEPT" onClick={onClickAccept} />
       </Styled.ButtonContainer>
     )}
-  </Section>
+  </>
 )
 
 Order.defaultProps = {

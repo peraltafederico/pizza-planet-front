@@ -3,12 +3,13 @@ import { useHistory } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { Header } from '../../components/Header'
 import { ConfirmForm } from '../../components/ConfirmForm'
-import { ClientData, OrderItem, TotalPrices } from '../../interfaces'
+import { ClientData, Item, TotalPrices } from '../../interfaces'
 import { Order } from '../../components/Order'
 import shopStore from '../../store/shopStore'
+import { Section } from '../../components/Section'
 
 interface ConfirmPageState {
-  orderItems?: OrderItem[]
+  items?: Item[]
   totalPrices?: TotalPrices
 }
 
@@ -28,20 +29,23 @@ export const ConfirmPage: FC = observer(() => {
 
   return (
     <>
-      {history.location.state?.orderItems && history.location.state?.totalPrices ? (
+      {history.location.state?.items && history.location.state?.totalPrices ? (
         <>
           <Header title="PIZZA PLANET!" counter={totalOrders} />
-          <ConfirmForm
-            onChange={handleOnChangeForm}
-            data={clientData}
-            onClickAccept={handleClickConfirm}
-          />
-          <Order
-            title="YOUR ORDER"
-            items={history.location.state?.orderItems}
-            totalPrices={history.location.state?.totalPrices}
-            hideButton={true}
-          />
+          <Section variant="lightGreen" title="CONFIRM FORM">
+            <ConfirmForm
+              onChange={handleOnChangeForm}
+              data={clientData}
+              onClickAccept={handleClickConfirm}
+            />
+          </Section>
+          <Section variant="green" title="YOUR ORDER">
+            <Order
+              items={history.location.state?.items}
+              totalPrices={history.location.state?.totalPrices}
+              hideButton={true}
+            />
+          </Section>
         </>
       ) : (
         history.push('/')

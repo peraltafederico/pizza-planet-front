@@ -1,15 +1,17 @@
 import { observable, action, computed, toJS } from 'mobx'
 import { createContext } from 'react'
-import { OrderItem } from '../interfaces'
+import { Item, Order, TotalPrices } from '../interfaces'
 
 class ShopStore {
-  @observable shopCart: OrderItem[][] = []
+  @observable shopCart: Order[] = JSON.parse(localStorage.getItem('orders') || '[]')
 
-  @action addOrder = (order: OrderItem[]): void => {
-    this.shopCart.push(order)
+  @action addOrder = ({ items, totalPrices }: Order): void => {
+    this.shopCart.push({ items, totalPrices })
+
+    localStorage.setItem('orders', JSON.stringify(this.orders))
   }
 
-  @computed get orders(): OrderItem[][] {
+  @computed get orders(): { items: Item[]; totalPrices: TotalPrices }[] {
     return toJS(this.shopCart)
   }
 

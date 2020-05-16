@@ -1,19 +1,27 @@
 import React, { FC, useState, useEffect, useContext } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { Header } from '../../components/Header'
 import { Choice } from '../../components/Choice'
 import { mockPizzasOption } from '../../mocks'
 import { Order } from '../../components/Order'
-import { OrderItem, TotalPrices } from '../../interfaces'
+import { Item, TotalPrices } from '../../interfaces'
 import shopStore from '../../store/shopStore'
+import { Section } from '../../components/Section'
 
 export const OrderPage: FC = observer(() => {
-  const [pizzasOption, setPizzasOption] = useState(mockPizzasOption)
-  const [orderItems, setOrderItems] = useState({} as OrderItem[])
+  const [option, setOption] = useState(mockPizzasOption)
+  const [items, setOrderItems] = useState({} as Item[])
   const [totalPrices, setTotalPrices] = useState({} as TotalPrices)
   const history = useHistory()
-  const { addOrder, orders, totalOrders } = useContext(shopStore)
+  const { addOrder, totalOrders, orders } = useContext(shopStore)
+  const { id } = useParams()
+
+  useEffect(() => {
+    if (id) {
+      console.log(orders[id].items)
+    }
+  }, [])
 
   useEffect(() => {
     const totalPrices = {
@@ -21,7 +29,7 @@ export const OrderPage: FC = observer(() => {
       totalEur: 0,
     }
 
-    const orderItems = pizzasOption
+    const items = option
       .filter((option) => option.amount > 0)
       .map((option) => {
         const usdPrice = option.prices.usd * option.amount
@@ -41,46 +49,44 @@ export const OrderPage: FC = observer(() => {
       })
 
     setTotalPrices(totalPrices)
-    setOrderItems(orderItems)
-  }, [pizzasOption])
+    setOrderItems(items)
+  }, [option])
 
   const handleClickPlus = (index: number): void => {
-    const newPizzasOption = [...pizzasOption]
-    newPizzasOption[index].amount += 1
+    const newOption = [...option]
+    newOption[index].amount += 1
 
-    setPizzasOption(newPizzasOption)
+    setOption(newOption)
   }
 
   const handleClickMinus = (index: number): void => {
-    const newPizzasOption = [...pizzasOption]
+    const newOption = [...option]
 
-    if (newPizzasOption[index].amount - 1 >= 0) {
-      newPizzasOption[index].amount -= 1
+    if (newOption[index].amount - 1 >= 0) {
+      newOption[index].amount -= 1
     }
 
-    setPizzasOption(newPizzasOption)
+    setOption(newOption)
   }
 
   const handleClickAccept = (): void => {
-    addOrder(orderItems)
-    history.push('/confirm', { orderItems, totalPrices })
+    addOrder({ items, totalPrices })
+    history.push('/confirm', { items, totalPrices })
   }
 
   return (
     <>
       <Header title="PIZZA PLANET!" counter={totalOrders} />
-      <Choice
-        options={mockPizzasOption}
-        handleClickPlus={handleClickPlus}
-        handleClickMinus={handleClickMinus}
-        title="CHOSE YOUR ORDER"
-      />
-      <Order
-        title="YOUR ORDER"
-        items={orderItems}
-        totalPrices={totalPrices}
-        onClickAccept={handleClickAccept}
-      />
+      <Section variant="lightGreen" title="CHOSE YOUR ORDER">
+        <Choice
+          options={mockPizzasOption}
+          handleClickPlus={handleClickPlus}
+          handleClickMinus={handleClickMinus}
+        />
+      </Section>
+      <Section variant="green" title="YOUR ORDER">
+        <Order items={items} totalPrices={totalPrices} onClickAccept={handleClickAccept} />
+      </Section>
     </>
   )
 })
