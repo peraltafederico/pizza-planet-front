@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect, useContext } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { Header } from '../../components/Header'
 import { Choice } from '../../components/Choice'
@@ -14,7 +14,14 @@ export const OrderPage: FC = observer(() => {
   const [items, setOrderItems] = useState({} as Item[])
   const [totalPrices, setTotalPrices] = useState({} as TotalPrices)
   const history = useHistory()
-  const { addOrder, orders, totalOrders } = useContext(shopStore)
+  const { addOrder, totalOrders, orders } = useContext(shopStore)
+  const { id } = useParams()
+
+  useEffect(() => {
+    if (id) {
+      console.log(orders[id].items)
+    }
+  }, [])
 
   useEffect(() => {
     const totalPrices = {

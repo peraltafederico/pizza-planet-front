@@ -13,7 +13,7 @@ const App: FC = () => {
       <GlobalStyles />
       <Router>
         <Switch>
-          <Route path="/order">
+          <Route path="/order/:id?">
             <OrderPage />
           </Route>
           <Route path="/confirm">
