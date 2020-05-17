@@ -2,16 +2,21 @@ import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import * as Styled from './ShopCart.styles'
 import { ClientOrder } from '../ClientOrder'
+import { Order } from '../../types'
 
-export const ShopCart: FC = () => (
+interface ShopCart {
+  orders: Partial<Order>[]
+  linkTo: string
+}
+
+export const ShopCart: FC<ShopCart> = ({ orders, linkTo }: ShopCart) => (
   <>
-    {/* {orders.map((order, index) => (
-      <Link to={`${linkTo}/${index}`} key={`order${index}`}>
+    {orders.map((order, index) => (
+      <Link to={`${linkTo}/${index + 1}`} key={`order${index}`}>
         <Styled.OrderContainer>
-          <ClientOrder items={order.items} totalPrices={order.totalPrices} hideButton={true} />
+          <ClientOrder order={order} hideButton={true} />
         </Styled.OrderContainer>
       </Link>
-    ))} */}
-    <div>asdsad</div>
+    ))}
   </>
 )

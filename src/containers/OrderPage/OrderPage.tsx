@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext } from 'react'
+import React, { FC, useState, useContext, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { Header } from '../../components/Header'
@@ -12,9 +12,13 @@ import { getProductsToOrder, getClientOrder } from '../../utils'
 export const OrderPage: FC = observer(() => {
   const [productsToOrder, setProductsToOrder] = useState(getProductsToOrder(mockPizzasOption))
   const history = useHistory()
-  const { addOrder, totalOrders } = useContext(shopStore)
+  const { addOrder, totalOrders, orders } = useContext(shopStore)
   const clientOrder = getClientOrder(productsToOrder)
   const { id } = useParams()
+
+  useEffect(() => {
+    console.log(orders[id - 1])
+  }, [])
 
   const handleClickPlus = (name: string): void => {
     setProductsToOrder({
