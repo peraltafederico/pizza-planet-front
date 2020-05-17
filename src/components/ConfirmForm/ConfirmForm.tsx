@@ -1,8 +1,7 @@
 import React, { FC } from 'react'
 import * as Styled from './ConfirmForm.styles'
-import { Section } from '../Section'
 import { Input } from './Input'
-import { ClientData } from '../../interfaces'
+import { ClientData } from '../../types'
 import { Button } from '../Button'
 
 interface ConfirmForm {

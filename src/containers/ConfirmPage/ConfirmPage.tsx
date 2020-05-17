@@ -3,14 +3,13 @@ import { useHistory } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { Header } from '../../components/Header'
 import { ConfirmForm } from '../../components/ConfirmForm'
-import { ClientData, Item, TotalPrices } from '../../interfaces'
-import { Order } from '../../components/Order'
+import { ClientData, Order } from '../../types'
 import shopStore from '../../store/shopStore'
 import { Section } from '../../components/Section'
+import { ClientOrder } from '../../components/ClientOrder'
 
 interface ConfirmPageState {
-  items?: Item[]
-  totalPrices?: TotalPrices
+  order?: Order
 }
 
 export const ConfirmPage: FC = observer(() => {
@@ -29,7 +28,7 @@ export const ConfirmPage: FC = observer(() => {
 
   return (
     <>
-      {history.location.state?.items && history.location.state?.totalPrices ? (
+      {history.location.state?.order ? (
         <>
           <Header title="PIZZA PLANET!" counter={totalOrders} />
           <Section variant="lightGreen" title="CONFIRM FORM">
@@ -40,11 +39,7 @@ export const ConfirmPage: FC = observer(() => {
             />
           </Section>
           <Section variant="green" title="YOUR ORDER">
-            <Order
-              items={history.location.state?.items}
-              totalPrices={history.location.state?.totalPrices}
-              hideButton={true}
-            />
+            <ClientOrder order={history.location.state?.order} hideButton={true} />
           </Section>
         </>
       ) : (
