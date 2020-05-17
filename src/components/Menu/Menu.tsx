@@ -6,26 +6,26 @@ import { Order } from '../../types'
 interface Menu {
   handleClickMinus: (name: string) => void
   handleClickPlus: (name: string) => void
-  productsToOrder: Order
+  order: Order
 }
 
-export const Menu: FC<Menu> = ({ handleClickMinus, handleClickPlus, productsToOrder }: Menu) => (
+export const Menu: FC<Menu> = ({ handleClickMinus, handleClickPlus, order }: Menu) => (
   <>
     {/* // TODO: create grid component */}
     <Styled.OptionsContainer>
-      {Object.keys(productsToOrder).map((product) => (
+      {Object.keys(order).map((product) => (
         <Styled.Container key={product}>
           <Styled.NameContainer>
             <Styled.Name>{product}</Styled.Name>
           </Styled.NameContainer>
           <Styled.NameContainer>
             <Styled.Name>
-              ${productsToOrder[product].prices.usd} / €{productsToOrder[product].prices.eur}{' '}
+              ${order[product].prices.usd} / €{order[product].prices.eur}{' '}
             </Styled.Name>
           </Styled.NameContainer>
           <Styled.AmountContainer>
             <Styled.LessIcon onClick={(): void => handleClickMinus(product)} icon={faMinus} />
-            <Styled.Amount>{productsToOrder[product].amount}</Styled.Amount>
+            <Styled.Amount>{order[product].amount}</Styled.Amount>
             <Styled.PlusIcon onClick={(): void => handleClickPlus(product)} icon={faPlus} />
           </Styled.AmountContainer>
         </Styled.Container>
