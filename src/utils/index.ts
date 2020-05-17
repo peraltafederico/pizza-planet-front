@@ -1,7 +1,7 @@
 import { pick, cloneDeep } from 'lodash'
 import { Product, Order } from '../types'
 
-export const getProductsToOrder = (products: Product[]): Order => {
+export const getDefaultOrder = (products: Product[]): Order => {
   const orderProducts: Order = {}
 
   products.map((product) => {

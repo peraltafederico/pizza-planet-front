@@ -8,7 +8,16 @@ class ShopStore {
   @action addOrder = (order: Partial<Order>): void => {
     this.shopCart.push(order)
 
-    localStorage.setItem('orders', JSON.stringify(this.orders))
+    localStorage.setItem(
+      'orders',
+      JSON.stringify(this.orders, (key, value) => {
+        if (key === 'prices') {
+          return undefined
+        }
+
+        return value
+      })
+    )
   }
 
   @computed get orders(): Partial<Order>[] {
