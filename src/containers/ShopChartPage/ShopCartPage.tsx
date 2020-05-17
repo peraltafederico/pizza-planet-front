@@ -12,7 +12,7 @@ export const ShopCartPage = observer(() => {
     <>
       <Header title="PIZZA PLANET!" counter={totalOrders} />
       <Section title="SHOP CART" variant="lightGreen">
-        <ShopCart orders={orders} linkTo="/orders" />
+        <ShopCart orders={orders} linkTo="/order" />
       </Section>
     </>
   )
