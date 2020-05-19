@@ -4,7 +4,6 @@ import { observer } from 'mobx-react-lite'
 import { merge } from 'lodash'
 import { Header } from '../../components/Header'
 import { Menu } from '../../components/Menu'
-import { mockPizzasOption } from '../../mocks'
 import { ClientOrder } from '../../components/ClientOrder'
 import shopStore from '../../store/shopStore'
 import { Section } from '../../components/Section'
@@ -20,7 +19,7 @@ export const OrderPage: FC = observer(() => {
   const { id } = useParams()
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProducts = async (): Promise<void> => {
       // fetching
 
       const { data } = await ApiService.getProducts()

@@ -28,7 +28,7 @@ export const ClientOrder: FC<ClientOrder> = ({
         return (
           <Styled.ItemsContainer key={product}>
             <Styled.NameContainer>
-              <Styled.Name>{product}</Styled.Name>
+              <Styled.Name>{order[product]!.name}</Styled.Name>
             </Styled.NameContainer>
             <Styled.AmountContainer>
               <Styled.Name>* {order[product]!.amount}</Styled.Name>

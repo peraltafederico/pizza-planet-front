@@ -1,4 +1,5 @@
 export interface Product {
+  id: number
   name: string
   usdPrice: number
   eurPrice: number
@@ -6,6 +7,7 @@ export interface Product {
 
 export interface Order {
   [name: string]: {
+    name: string
     amount: number
     usdPrice: number
     eurPrice: number

@@ -5,7 +5,8 @@ export const getDefaultOrder = (products: Product[]): Order => {
   const orderProducts: Order = {}
 
   products.forEach((product) => {
-    orderProducts[product.name] = {
+    orderProducts[product.id] = {
+      name: product.name,
       amount: 0,
       eurPrice: product.eurPrice,
       usdPrice: product.usdPrice,
