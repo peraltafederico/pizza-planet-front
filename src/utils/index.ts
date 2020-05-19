@@ -4,10 +4,11 @@ import { Product, Order } from '../types'
 export const getDefaultOrder = (products: Product[]): Order => {
   const orderProducts: Order = {}
 
-  products.map((product) => {
+  products.forEach((product) => {
     orderProducts[product.name] = {
       amount: 0,
-      prices: product.prices,
+      eurPrice: product.eurPrice,
+      usdPrice: product.usdPrice,
     }
   })
 
@@ -22,11 +23,9 @@ export const getClientOrder = (productsToOrder: Order): Partial<Order> => {
   const clientOrder = pick<Order>(cloneDeep(productsToOrder), gtzProducts)
 
   Object.keys(clientOrder).forEach((product) => {
-    clientOrder[product]!.prices.usd =
-      clientOrder[product]!.prices.usd * clientOrder[product]!.amount
+    clientOrder[product]!.usdPrice = clientOrder[product]!.usdPrice * clientOrder[product]!.amount
 
-    clientOrder[product]!.prices.eur =
-      clientOrder[product]!.prices.eur * clientOrder[product]!.amount
+    clientOrder[product]!.eurPrice = clientOrder[product]!.eurPrice * clientOrder[product]!.amount
   })
 
   return clientOrder

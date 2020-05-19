@@ -20,7 +20,7 @@ export const Menu: FC<Menu> = ({ handleClickMinus, handleClickPlus, order }: Men
           </Styled.NameContainer>
           <Styled.NameContainer>
             <Styled.Name>
-              ${order[product].prices.usd} / €{order[product].prices.eur}{' '}
+              ${order[product].usdPrice} / €{order[product].eurPrice}{' '}
             </Styled.Name>
           </Styled.NameContainer>
           <Styled.AmountContainer>
