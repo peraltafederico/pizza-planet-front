@@ -10,6 +10,7 @@ import { Section } from '../../components/Section'
 import { getDefaultOrder, getClientOrder } from '../../utils'
 import { Order } from '../../types'
 import { ApiService } from '../../services/apiService'
+import { Spinner } from '../../components/Spinner'
 
 export const OrderPage: FC = observer(() => {
   const [defaultOrder, setDefaultOrder] = useState({} as Order)
@@ -17,6 +18,7 @@ export const OrderPage: FC = observer(() => {
   const { addOrder, editOrder, totalOrders, orders } = useContext(shopStore)
   const clientOrder = getClientOrder(defaultOrder)
   const { id } = useParams()
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchProducts = async (): Promise<void> => {
@@ -37,6 +39,8 @@ export const OrderPage: FC = observer(() => {
       } else {
         setDefaultOrder(getDefaultOrder(data))
       }
+
+      setLoading(false)
     }
 
     fetchProducts()
@@ -76,14 +80,22 @@ export const OrderPage: FC = observer(() => {
     <>
       <Header title="PIZZA PLANET!" counter={totalOrders} />
       <Section variant="lightGreen" title="MENU">
-        <Menu
-          order={defaultOrder}
-          handleClickPlus={handleClickPlus}
-          handleClickMinus={handleClickMinus}
-        />
+        {!loading ? (
+          <Menu
+            order={defaultOrder}
+            handleClickPlus={handleClickPlus}
+            handleClickMinus={handleClickMinus}
+          />
+        ) : (
+          <Spinner />
+        )}
       </Section>
       <Section variant="green" title="YOUR ORDER">
-        <ClientOrder order={clientOrder} onClickAccept={handleClickAccept} />
+        {!loading ? (
+          <ClientOrder order={clientOrder} onClickAccept={handleClickAccept} />
+        ) : (
+          <Spinner />
+        )}
       </Section>
     </>
   )

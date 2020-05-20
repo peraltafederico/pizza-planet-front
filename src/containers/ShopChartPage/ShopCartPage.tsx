@@ -6,28 +6,42 @@ import { ShopCart } from '../../components/ShopCart'
 import { Header } from '../../components/Header'
 import { Section } from '../../components/Section'
 import { getDefaultOrder, getClientOrder } from '../../utils'
-import { mockPizzasOption } from '../../mocks'
 import { Order } from '../../types'
+import { ApiService } from '../../services/apiService'
+import { Spinner } from '../../components/Spinner/Spinner.styles'
 
 export const ShopCartPage = observer(() => {
   const { orders, totalOrders } = useContext(shopStore)
   const [clientOrders, setClientOrders] = useState([] as Partial<Order>[])
+  const [defaultOrder, setDefaultOrder] = useState({} as Order)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchProducts = async (): Promise<void> => {
+      const { data } = await ApiService.getProducts()
+
+      setDefaultOrder(getDefaultOrder(data))
+      setLoading(false)
+    }
+
+    fetchProducts()
+  }, [])
 
   useEffect(() => {
     const updatedClientOrders = orders.map((order) => {
-      const updatedDefaultOrder = merge(getDefaultOrder(mockPizzasOption), order)
+      const updatedDefaultOrder = merge(defaultOrder, order)
 
       return getClientOrder(pick(updatedDefaultOrder, Object.keys(order)))
     })
 
     setClientOrders(updatedClientOrders)
-  }, [orders])
+  }, [orders, defaultOrder])
 
   return (
     <>
       <Header title="PIZZA PLANET!" counter={totalOrders} />
       <Section title="SHOP CART" variant="lightGreen">
-        <ShopCart orders={clientOrders} linkTo="/order" />
+        {!loading ? <ShopCart orders={clientOrders} linkTo="/order" /> : <Spinner />}
       </Section>
     </>
   )
