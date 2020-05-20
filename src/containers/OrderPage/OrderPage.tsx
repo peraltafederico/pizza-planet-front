@@ -94,7 +94,9 @@ export const OrderPage: FC = observer(() => {
           </Styled.ButtonContainer>
         </>
       ) : (
-        <Spinner />
+        <div>
+          <Spinner />
+        </div>
       )}
     </Layout>
   )

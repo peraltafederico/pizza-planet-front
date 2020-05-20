@@ -20,6 +20,7 @@ export const ShoppingCartIcon = styled(FontAwesomeIcon)`
 export const TitleContainer = styled.div`
   justify-content: center;
   margin: auto;
+  cursor: pointer;
 `
 
 export const Title = styled.h1`

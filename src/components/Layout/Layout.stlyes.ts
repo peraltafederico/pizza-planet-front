@@ -14,5 +14,11 @@ export const Content = styled.div`
     flex: 1;
     align-items: center;
     margin: 0 15px 45px;
+    flex-wrap: wrap;
+
+    & > a {
+      margin-right: 70px;
+      margin-bottom: 70px;
+    }
   }
 `

@@ -87,7 +87,15 @@ export const ConfirmPage: FC = observer(() => {
                 onSubmit={handleSubmitForm}
               />
             </div>
-            <div>{!loading ? <ClientOrder order={clientOrder} /> : <Spinner />}</div>
+            <div>
+              {!loading ? (
+                <ClientOrder order={clientOrder} />
+              ) : (
+                <div>
+                  <Spinner />
+                </div>
+              )}
+            </div>
             <Styled.ButtonContainer>
               <Button text="I WANT TO ORDER" formId="confirmForm" />
             </Styled.ButtonContainer>

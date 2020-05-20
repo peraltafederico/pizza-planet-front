@@ -9,6 +9,7 @@ import { getDefaultOrder, getClientOrder } from '../../utils'
 import { Order } from '../../types'
 import { ApiService } from '../../services/apiService'
 import { Spinner } from '../../components/Spinner/Spinner.styles'
+import { Layout } from '../../components/Layout'
 
 export const ShopCartPage = observer(() => {
   const { orders, totalOrders } = useContext(shopStore)
@@ -39,10 +40,17 @@ export const ShopCartPage = observer(() => {
 
   return (
     <>
-      <Header title="PIZZA PLANET!" counter={totalOrders} />
-      <Section title="SHOP CART" variant="lightGreen">
-        {!loading ? <ShopCart orders={clientOrders} linkTo="/order" /> : <Spinner />}
-      </Section>
+      <Layout totalOrders={totalOrders}>
+        <div>
+          {!loading ? (
+            <ShopCart orders={clientOrders} linkTo="/order" />
+          ) : (
+            <div>
+              <Spinner />
+            </div>
+          )}
+        </div>
+      </Layout>
     </>
   )
 })
