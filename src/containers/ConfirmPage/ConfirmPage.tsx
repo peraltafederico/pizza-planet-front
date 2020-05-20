@@ -1,7 +1,7 @@
 import React, { FC, useState, useContext, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
-import { merge, pick } from 'lodash'
+import { merge } from 'lodash'
 import { Header } from '../../components/Header'
 import { ConfirmForm } from '../../components/ConfirmForm'
 import { ClientData, Order } from '../../types'
@@ -19,6 +19,7 @@ export const ConfirmPage: FC = observer(() => {
   const { totalOrders, orders, removeOrder } = useContext(shopStore)
   const { id } = useParams()
   const [loading, setLoading] = useState(true)
+  const [done, setDone] = useState(false)
 
   const handleOnChangeForm = (event: React.FormEvent<HTMLInputElement>): void => {
     setClientData({
@@ -47,21 +48,49 @@ export const ConfirmPage: FC = observer(() => {
     fetchProducts()
   }, [id, orders, history])
 
-  const handleClickConfirm = (): void => removeOrder(id - 1)
+  useEffect(() => {
+    const sendOrder = async (): Promise<void> => {
+      const data = {
+        ...clientData,
+        products: Object.keys(clientOrder),
+      }
+
+      await ApiService.sendOrder(data)
+    }
+
+    if (done) {
+      sendOrder()
+
+      setTimeout(() => {
+        history.replace('/order')
+        removeOrder(id - 1)
+      }, 1600)
+    }
+  }, [id, removeOrder, done, clientOrder, clientData, history])
+
+  const handleClickConfirm = (): void => {
+    setDone(true)
+  }
 
   return (
     <>
-      <Header title="PIZZA PLANET!" counter={totalOrders} />
-      <Section variant="lightGreen" title="CONFIRM FORM">
-        <ConfirmForm
-          onChange={handleOnChangeForm}
-          data={clientData}
-          onClickAccept={handleClickConfirm}
-        />
-      </Section>
-      <Section variant="green" title="YOUR ORDER">
-        {!loading ? <ClientOrder order={clientOrder} hideButton={true} /> : <Spinner />}
-      </Section>
+      {!done ? (
+        <>
+          <Header title="PIZZA PLANET!" counter={totalOrders} />
+          <Section variant="lightGreen" title="CONFIRM FORM">
+            <ConfirmForm
+              onChange={handleOnChangeForm}
+              data={clientData}
+              onClickAccept={handleClickConfirm}
+            />
+          </Section>
+          <Section variant="green" title="YOUR ORDER">
+            {!loading ? <ClientOrder order={clientOrder} hideButton={true} /> : <Spinner />}
+          </Section>
+        </>
+      ) : (
+        <div>completado</div>
+      )}
     </>
   )
 })

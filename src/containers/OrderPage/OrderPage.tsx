@@ -22,8 +22,6 @@ export const OrderPage: FC = observer(() => {
 
   useEffect(() => {
     const fetchProducts = async (): Promise<void> => {
-      // fetching
-
       const { data } = await ApiService.getProducts()
 
       if (id) {
