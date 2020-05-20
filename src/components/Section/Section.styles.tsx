@@ -9,6 +9,7 @@ export const Container = styled.div`
     props.theme.colors[props.color]};
   padding: 15px 40px;
   align-items: flex-start;
+  overflow-x: auto;
 `
 
 export const Title = styled.h2`

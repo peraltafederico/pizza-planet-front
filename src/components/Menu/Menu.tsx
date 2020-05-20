@@ -23,7 +23,7 @@ export const Menu: FC<Menu> = ({ handleClickMinus, handleClickPlus, order }: Men
       <Styled.TableBody>
         {Object.keys(order).map((product) => (
           <Styled.TableRow key={product}>
-            <Styled.TableData>{order[product].name}</Styled.TableData>
+            <Styled.TableData>{order[product].name.toUpperCase()}</Styled.TableData>
             <Styled.TableData>
               ${order[product].usdPrice} / €{order[product].eurPrice}
             </Styled.TableData>

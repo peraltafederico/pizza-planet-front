@@ -21,31 +21,36 @@ export const ClientOrder: FC<ClientOrder> = ({
 
   return (
     <>
-      {Object.keys(order).map((product) => {
-        totalPrices.totalEur += order[product]!.eurPrice
-        totalPrices.totalUsd += order[product]!.usdPrice
+      <Styled.Table>
+        <Styled.TableHeadGroup>
+          <Styled.TableRow>
+            <Styled.TableHead>Pizza</Styled.TableHead>
+            <Styled.TableHead>Prices</Styled.TableHead>
+            <Styled.TableHead>Amount</Styled.TableHead>
+          </Styled.TableRow>
+        </Styled.TableHeadGroup>
+        <Styled.TableBody>
+          {Object.keys(order).map((product) => {
+            totalPrices.totalEur += order[product]!.eurPrice
+            totalPrices.totalUsd += order[product]!.usdPrice
 
-        return (
-          <Styled.ItemsContainer key={product}>
-            <Styled.NameContainer>
-              <Styled.Name>{order[product]!.name}</Styled.Name>
-            </Styled.NameContainer>
-            <Styled.AmountContainer>
-              <Styled.Name>* {order[product]!.amount}</Styled.Name>
-            </Styled.AmountContainer>
-            <Styled.PriceContainer>
-              <Styled.Price>
-                ${order[product]!.usdPrice} / €{order[product]!.eurPrice}
-              </Styled.Price>
-            </Styled.PriceContainer>
-          </Styled.ItemsContainer>
-        )
-      })}
-      <Styled.TotalContainer>
-        <Styled.Total>
-          TOTAL PRICE: ${totalPrices.totalUsd} / €{totalPrices.totalEur}
-        </Styled.Total>
-      </Styled.TotalContainer>
+            return (
+              <Styled.TableRow key={product}>
+                <Styled.TableData>{order[product]!.name.toUpperCase()}</Styled.TableData>
+                <Styled.TableData>
+                  ${order[product]!.usdPrice} / €{order[product]!.eurPrice}
+                </Styled.TableData>
+                <Styled.TableData>{order[product]!.amount}</Styled.TableData>
+              </Styled.TableRow>
+            )
+          })}
+        </Styled.TableBody>
+        <Styled.TableFooter>
+          <Styled.TableData colSpan={3}>
+            TOTAL PRICE: ${totalPrices.totalUsd} / €{totalPrices.totalEur}
+          </Styled.TableData>
+        </Styled.TableFooter>
+      </Styled.Table>
       {!hideButton && (
         <Styled.ButtonContainer>
           <Button text="ACCEPT" onClick={onClickAccept} />
