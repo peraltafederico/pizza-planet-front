@@ -11,25 +11,30 @@ interface Menu {
 
 export const Menu: FC<Menu> = ({ handleClickMinus, handleClickPlus, order }: Menu) => (
   <>
-    {/* // TODO: create grid component */}
-    <Styled.OptionsContainer>
-      {Object.keys(order).map((product) => (
-        <Styled.Container key={product}>
-          <Styled.NameContainer>
-            <Styled.Name>{order[product].name}</Styled.Name>
-          </Styled.NameContainer>
-          <Styled.NameContainer>
-            <Styled.Name>
-              ${order[product].usdPrice} / €{order[product].eurPrice}{' '}
-            </Styled.Name>
-          </Styled.NameContainer>
-          <Styled.AmountContainer>
-            <Styled.LessIcon onClick={(): void => handleClickMinus(product)} icon={faMinus} />
-            <Styled.Amount>{order[product].amount}</Styled.Amount>
-            <Styled.PlusIcon onClick={(): void => handleClickPlus(product)} icon={faPlus} />
-          </Styled.AmountContainer>
-        </Styled.Container>
-      ))}
-    </Styled.OptionsContainer>
+    <Styled.Table>
+      <Styled.TableHeadGroup>
+        <Styled.TableRow>
+          <Styled.TableHead>Pizzas</Styled.TableHead>
+          <Styled.TableHead>Prices</Styled.TableHead>
+          <Styled.TableHead>Amount</Styled.TableHead>
+          <Styled.TableHead>Change amount</Styled.TableHead>
+        </Styled.TableRow>
+      </Styled.TableHeadGroup>
+      <Styled.TableBody>
+        {Object.keys(order).map((product) => (
+          <Styled.TableRow key={product}>
+            <Styled.TableData>{order[product].name}</Styled.TableData>
+            <Styled.TableData>
+              ${order[product].usdPrice} / €{order[product].eurPrice}
+            </Styled.TableData>
+            <Styled.TableData>{order[product].amount}</Styled.TableData>
+            <Styled.TableData>
+              <Styled.LessIcon onClick={(): void => handleClickMinus(product)} icon={faMinus} />
+              <Styled.PlusIcon onClick={(): void => handleClickPlus(product)} icon={faPlus} />
+            </Styled.TableData>
+          </Styled.TableRow>
+        ))}
+      </Styled.TableBody>
+    </Styled.Table>
   </>
 )

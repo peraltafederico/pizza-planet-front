@@ -8,7 +8,7 @@ export const Container = styled.div`
   background-color: ${(props: { theme: DefaultTheme; color: SectionVariant }): string =>
     props.theme.colors[props.color]};
   padding: 15px 40px;
-  align-items: center;
+  align-items: flex-start;
 `
 
 export const Title = styled.h2`
