@@ -29,7 +29,7 @@ export const TableHeadGroup = styled.thead`
 `
 
 export const TableHead = styled.th`
-  padding: 5px 25px;
+  padding: 30px 25px 5px 25px;
 `
 
 export const TableBody = styled.tbody``

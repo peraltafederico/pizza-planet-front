@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const Spinner = styled.div`
   color: ${(props): string => props.theme.colors.red};
-  font-size: 10px;
-  margin: 80px auto;
+  font-size: 30px;
+  margin: 0 auto;
   position: relative;
   text-indent: -9999em;
   -webkit-transform: translateZ(0);

@@ -2,11 +2,9 @@ import React, { FC, useState, useContext, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { merge } from 'lodash'
-import { Header } from '../../components/Header'
 import { Menu } from '../../components/Menu'
 import { ClientOrder } from '../../components/ClientOrder'
 import shopStore from '../../store/shopStore'
-import { Section } from '../../components/Section'
 import { getDefaultOrder, getClientOrder } from '../../utils'
 import { Order } from '../../types'
 import { ApiService } from '../../services/apiService'
@@ -89,10 +87,10 @@ export const OrderPage: FC = observer(() => {
             />
           </div>
           <Styled.OrderContainer>
-            <ClientOrder order={clientOrder} onClickAccept={handleClickAccept} hideButton={true} />
+            <ClientOrder order={clientOrder} />
           </Styled.OrderContainer>
           <Styled.ButtonContainer>
-            <Button text="ACCEPT" onClick={handleClickAccept} />
+            <Button text="CONTINUE" onClick={handleClickAccept} />
           </Styled.ButtonContainer>
         </>
       ) : (

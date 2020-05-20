@@ -1,19 +1,12 @@
 import React, { FC } from 'react'
 import * as Styled from './ClientOrder.styles'
-import { Button } from '../Button'
 import { Order } from '../../types'
 
 interface ClientOrder {
   order: Partial<Order>
-  onClickAccept?: () => void
-  hideButton?: boolean
 }
 
-export const ClientOrder: FC<ClientOrder> = ({
-  order,
-  onClickAccept = (): void => {},
-  hideButton,
-}: ClientOrder) => {
+export const ClientOrder: FC<ClientOrder> = ({ order }: ClientOrder) => {
   const totalPrices = {
     totalUsd: 0,
     totalEur: 0,
@@ -51,15 +44,6 @@ export const ClientOrder: FC<ClientOrder> = ({
           </Styled.TableData>
         </Styled.TableFooter>
       </Styled.Table>
-      {!hideButton && (
-        <Styled.ButtonContainer>
-          <Button text="ACCEPT" onClick={onClickAccept} />
-        </Styled.ButtonContainer>
-      )}
     </>
   )
-}
-
-ClientOrder.defaultProps = {
-  hideButton: false,
 }

@@ -2,35 +2,51 @@ import React, { FC } from 'react'
 import * as Styled from './ConfirmForm.styles'
 import { Input } from './Input'
 import { ClientData } from '../../types'
-import { Button } from '../Button'
 
 interface ConfirmForm {
   onChange: (event: React.FormEvent<HTMLInputElement>) => void
   data: ClientData
-  onClickAccept: () => void
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
 }
 
-export const ConfirmForm: FC<ConfirmForm> = ({ onChange, data, onClickAccept }: ConfirmForm) => (
-  <>
+export const ConfirmForm: FC<ConfirmForm> = ({ onChange, data, onSubmit }: ConfirmForm) => (
+  <form id="confirmForm" onSubmit={onSubmit}>
     <Styled.InputContainer>
       <Input
         onChange={onChange}
         label="Name"
-        inputProps={{ name: 'name', placeholder: 'My Name', value: data.name }}
+        inputProps={{ name: 'name', placeholder: 'My Name', value: data.name, required: true }}
       />
       <Input
         onChange={onChange}
         label="Phone"
-        inputProps={{ name: 'phone', placeholder: '01160040960', value: data.phone }}
+        inputProps={{
+          name: 'phone',
+          placeholder: '01160040960',
+          value: data.phone,
+          required: true,
+        }}
       />
       <Input
         onChange={onChange}
         label="Address"
-        inputProps={{ name: 'address', placeholder: 'Address 1225', value: data.address }}
+        inputProps={{
+          name: 'address',
+          placeholder: 'Address 1225',
+          value: data.address,
+          required: true,
+        }}
+      />
+      <Input
+        onChange={onChange}
+        label="Email"
+        inputProps={{
+          name: 'email',
+          placeholder: 'myemail@gmail.com',
+          value: data.address,
+          required: true,
+        }}
       />
     </Styled.InputContainer>
-    <Styled.ButtonContainer>
-      <Button text="ACCEPT" onClick={onClickAccept} />
-    </Styled.ButtonContainer>
-  </>
+  </form>
 )

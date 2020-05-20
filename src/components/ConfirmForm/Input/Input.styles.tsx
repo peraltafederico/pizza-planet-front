@@ -7,9 +7,9 @@ export const Container = styled.div`
 `
 
 export const Input = styled.input`
-  width: 350px;
-  height: 40px;
-  font-size: 18px;
+  width: 750px;
+  height: 65px;
+  font-size: 35px;
   padding: 5px;
   box-sizing: border-box;
 `
@@ -17,4 +17,5 @@ export const Label = styled.label`
   align-self: flex-start;
   font-weight: bold;
   margin-bottom: 5px;
+  font-size: 30px;
 `

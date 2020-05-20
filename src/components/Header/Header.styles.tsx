@@ -29,12 +29,12 @@ export const Title = styled.h1`
 
 export const CounterContainer = styled.div`
   background-color: rgb(245, 67, 54, 0.8);
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
   border-radius: 50%;
   position: absolute;
-  right: 10px;
-  bottom: 14px;
+  right: 9px;
+  top: 17px;
   display: flex;
   justify-content: center;
   align-items: center;
