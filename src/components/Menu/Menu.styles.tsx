@@ -78,5 +78,5 @@ export const TableBody = styled.tbody``
 export const TableData = styled.td`
   text-align: center;
   font-size: 25px;
-  padding: 10px 0;
+  padding: 15px 0;
 `

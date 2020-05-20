@@ -11,6 +11,9 @@ import { getDefaultOrder, getClientOrder } from '../../utils'
 import { Order } from '../../types'
 import { ApiService } from '../../services/apiService'
 import { Spinner } from '../../components/Spinner'
+import { Layout } from '../../components/Layout'
+import { Button } from '../../components/Button'
+import * as Styled from './OrderPage.styles'
 
 export const OrderPage: FC = observer(() => {
   const [defaultOrder, setDefaultOrder] = useState({} as Order)
@@ -75,26 +78,26 @@ export const OrderPage: FC = observer(() => {
   }
 
   return (
-    <>
-      <Header title="PIZZA PLANET!" counter={totalOrders} />
-      <Section variant="lightGreen" title="MENU">
-        {!loading ? (
-          <Menu
-            order={defaultOrder}
-            handleClickPlus={handleClickPlus}
-            handleClickMinus={handleClickMinus}
-          />
-        ) : (
-          <Spinner />
-        )}
-      </Section>
-      <Section variant="green" title="YOUR ORDER">
-        {!loading ? (
-          <ClientOrder order={clientOrder} onClickAccept={handleClickAccept} />
-        ) : (
-          <Spinner />
-        )}
-      </Section>
-    </>
+    <Layout totalOrders={totalOrders}>
+      {!loading ? (
+        <>
+          <div>
+            <Menu
+              order={defaultOrder}
+              handleClickPlus={handleClickPlus}
+              handleClickMinus={handleClickMinus}
+            />
+          </div>
+          <Styled.OrderContainer>
+            <ClientOrder order={clientOrder} onClickAccept={handleClickAccept} hideButton={true} />
+          </Styled.OrderContainer>
+          <Styled.ButtonContainer>
+            <Button text="ACCEPT" onClick={handleClickAccept} />
+          </Styled.ButtonContainer>
+        </>
+      ) : (
+        <Spinner />
+      )}
+    </Layout>
   )
 })

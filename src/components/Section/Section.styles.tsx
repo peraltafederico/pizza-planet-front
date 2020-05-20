@@ -4,12 +4,12 @@ import { SectionVariant } from '../../types'
 export const Container = styled.div`
   flex: 1;
   display: flex;
-  flex-direction: column;
   background-color: ${(props: { theme: DefaultTheme; color: SectionVariant }): string =>
     props.theme.colors[props.color]};
   padding: 15px 40px;
-  align-items: flex-start;
+  align-items: center;
   overflow-x: auto;
+  flex-wrap: wrap;
 `
 
 export const Title = styled.h2`
