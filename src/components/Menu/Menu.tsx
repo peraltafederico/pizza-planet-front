@@ -16,11 +16,11 @@ export const Menu: FC<Menu> = ({ handleClickMinus, handleClickPlus, order }: Men
       {Object.keys(order).map((product) => (
         <Styled.Container key={product}>
           <Styled.NameContainer>
-            <Styled.Name>{product}</Styled.Name>
+            <Styled.Name>{order[product].name}</Styled.Name>
           </Styled.NameContainer>
           <Styled.NameContainer>
             <Styled.Name>
-              ${order[product].prices.usd} / €{order[product].prices.eur}{' '}
+              ${order[product].usdPrice} / €{order[product].eurPrice}{' '}
             </Styled.Name>
           </Styled.NameContainer>
           <Styled.AmountContainer>

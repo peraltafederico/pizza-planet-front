@@ -1,18 +1,16 @@
 export interface Product {
+  id: number
   name: string
-  prices: {
-    usd: number
-    eur: number
-  }
+  usdPrice: number
+  eurPrice: number
 }
 
 export interface Order {
   [name: string]: {
+    name: string
     amount: number
-    prices: {
-      usd: number
-      eur: number
-    }
+    usdPrice: number
+    eurPrice: number
   }
 }
 

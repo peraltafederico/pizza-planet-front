@@ -1,58 +1,50 @@
 export const mockPizzasOption = [
   {
+    id: 1,
     name: 'Peperoni',
-    prices: {
-      usd: 1.35,
-      eur: 1.2,
-    },
+    usdPrice: 1.35,
+    eurPrice: 1.2,
   },
   {
+    id: 2,
     name: 'Muzzarella',
-    prices: {
-      usd: 2,
-      eur: 3.6,
-    },
+    usdPrice: 2,
+    eurPrice: 3.6,
   },
   {
+    id: 3,
     name: 'Crazy house',
-    prices: {
-      usd: 4,
-      eur: 8,
-    },
+    usdPrice: 4,
+    eurPrice: 8,
   },
   {
+    id: 4,
     name: 'Caprichosa',
-    prices: {
-      usd: 5,
-      eur: 175,
-    },
+    usdPrice: 5,
+    eurPrice: 175,
   },
   {
+    id: 5,
     name: 'Clasicc',
-    prices: {
-      usd: 9,
-      eur: 3.9,
-    },
+    usdPrice: 9,
+    eurPrice: 3.9,
   },
   {
+    id: 6,
     name: 'Something',
-    prices: {
-      usd: 8,
-      eur: 10,
-    },
+    usdPrice: 8,
+    eurPrice: 10,
   },
   {
+    id: 7,
     name: 'Another',
-    prices: {
-      usd: 3.5,
-      eur: 6.9,
-    },
+    usdPrice: 3.5,
+    eurPrice: 6.9,
   },
   {
+    id: 8,
     name: 'The last one',
-    prices: {
-      usd: 4.6,
-      eur: 5.4,
-    },
+    usdPrice: 4.6,
+    eurPrice: 5.4,
   },
 ]

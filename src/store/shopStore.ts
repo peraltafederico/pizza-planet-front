@@ -8,7 +8,7 @@ class ShopStore {
       localStorage.setItem(
         'orders',
         JSON.stringify(this.orders, (key, value) => {
-          if (key === 'prices') {
+          if (key === 'eurPrice' || key === 'usdPrice') {
             return undefined
           }
 

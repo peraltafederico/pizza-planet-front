@@ -22,20 +22,20 @@ export const ClientOrder: FC<ClientOrder> = ({
   return (
     <>
       {Object.keys(order).map((product) => {
-        totalPrices.totalEur += order[product]!.prices.eur
-        totalPrices.totalUsd += order[product]!.prices.usd
+        totalPrices.totalEur += order[product]!.eurPrice
+        totalPrices.totalUsd += order[product]!.usdPrice
 
         return (
           <Styled.ItemsContainer key={product}>
             <Styled.NameContainer>
-              <Styled.Name>{product}</Styled.Name>
+              <Styled.Name>{order[product]!.name}</Styled.Name>
             </Styled.NameContainer>
             <Styled.AmountContainer>
               <Styled.Name>* {order[product]!.amount}</Styled.Name>
             </Styled.AmountContainer>
             <Styled.PriceContainer>
               <Styled.Price>
-                ${order[product]!.prices.usd} / €{order[product]!.prices.eur}
+                ${order[product]!.usdPrice} / €{order[product]!.eurPrice}
               </Styled.Price>
             </Styled.PriceContainer>
           </Styled.ItemsContainer>
