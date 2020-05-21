@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { media } from '../../theme/index'
 
 export const Spinner = styled.div`
   color: ${(props): string => props.theme.colors.red};
@@ -18,6 +19,10 @@ export const Spinner = styled.div`
   animation-fill-mode: both;
   -webkit-animation: load7 1.8s infinite ease-in-out;
   animation: load7 1.8s infinite ease-in-out;
+
+  ${media.small} {
+    font-size: 10px;
+  }
 
   &::before,
   &::after {

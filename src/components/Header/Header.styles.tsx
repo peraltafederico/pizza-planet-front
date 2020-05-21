@@ -8,7 +8,9 @@ export const Container = styled.div`
   background-color: ${(props): string => props.theme.colors.green};
   display: flex;
   align-items: center;
-  position: relative;
+  position: fixed;
+  box-shadow: 0px 0px 8px 5px grey;
+  z-index: 999;
 
   ${media.small} {
     height: 60px;
