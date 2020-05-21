@@ -10,7 +10,7 @@ interface ConfirmForm {
 }
 
 export const ConfirmForm: FC<ConfirmForm> = ({ onChange, data, onSubmit }: ConfirmForm) => (
-  <form id="confirmForm" onSubmit={onSubmit}>
+  <Styled.Form id="confirmForm" onSubmit={onSubmit}>
     <Styled.InputContainer>
       <Input
         onChange={onChange}
@@ -48,5 +48,5 @@ export const ConfirmForm: FC<ConfirmForm> = ({ onChange, data, onSubmit }: Confi
         }}
       />
     </Styled.InputContainer>
-  </form>
+  </Styled.Form>
 )

@@ -8,8 +8,8 @@ export const getDefaultOrder = (products: Product[]): Order => {
     orderProducts[product.id] = {
       name: product.name,
       amount: 0,
-      eurPrice: product.eurPrice,
-      usdPrice: product.usdPrice,
+      eurPrice: parseFloat(product.eurPrice),
+      usdPrice: parseFloat(product.usdPrice),
     }
   })
 
@@ -24,10 +24,25 @@ export const getClientOrder = (productsToOrder: Order): Partial<Order> => {
   const clientOrder = pick<Order>(cloneDeep(productsToOrder), gtzProducts)
 
   Object.keys(clientOrder).forEach((product) => {
-    clientOrder[product]!.usdPrice = clientOrder[product]!.usdPrice * clientOrder[product]!.amount
+    clientOrder[product]!.usdPrice = decimal(
+      clientOrder[product]!.usdPrice * clientOrder[product]!.amount
+    )
 
-    clientOrder[product]!.eurPrice = clientOrder[product]!.eurPrice * clientOrder[product]!.amount
+    clientOrder[product]!.eurPrice = decimal(
+      clientOrder[product]!.eurPrice * clientOrder[product]!.amount
+    )
   })
 
   return clientOrder
 }
+
+export const getOrderWithoutPrices = (order: Partial<Order>): Partial<Order> => {
+  Object.keys(order).forEach((product) => {
+    order[product]!.eurPrice = undefined
+    order[product]!.usdPrice = undefined
+  })
+
+  return order
+}
+
+export const decimal = (number: number): number => Math.round(number * 100) / 100

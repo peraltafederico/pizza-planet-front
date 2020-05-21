@@ -10,7 +10,6 @@ const GlobalStyle = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* overflow: hidden; */
   }
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -21,6 +20,15 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     display: flex;
     flex-direction: column
+  }
+
+  a {
+    text-decoration: none;
+    color: unset;
+
+    :hover {
+      color: red;
+    }
   }
 `
 export default GlobalStyle

@@ -6,7 +6,7 @@ import { ConfirmForm } from '../../components/ConfirmForm'
 import { ClientData, Order } from '../../types'
 import shopStore from '../../store/shopStore'
 import { ClientOrder } from '../../components/ClientOrder'
-import { getDefaultOrder } from '../../utils'
+import { getDefaultOrder, getClientOrder } from '../../utils'
 import { ApiService } from '../../services/apiService'
 import { Spinner } from '../../components/Spinner/Spinner.styles'
 import { Layout } from '../../components/Layout'
@@ -38,7 +38,7 @@ export const ConfirmPage: FC = observer(() => {
       if (clientOrder) {
         const updatedDefaultOrder = merge(getDefaultOrder(data), clientOrder)
 
-        setClientOrder(updatedDefaultOrder)
+        setClientOrder(getClientOrder(updatedDefaultOrder))
       } else {
         history.push('/order')
       }
@@ -80,22 +80,16 @@ export const ConfirmPage: FC = observer(() => {
       {!done ? (
         <>
           <Layout totalOrders={totalOrders}>
-            <div>
+            <Styled.ConfirmFormContainer>
               <ConfirmForm
                 onChange={handleOnChangeForm}
                 data={clientData}
                 onSubmit={handleSubmitForm}
               />
-            </div>
-            <div>
-              {!loading ? (
-                <ClientOrder order={clientOrder} />
-              ) : (
-                <div>
-                  <Spinner />
-                </div>
-              )}
-            </div>
+            </Styled.ConfirmFormContainer>
+            <Styled.ClientOrderContainer>
+              {!loading ? <ClientOrder order={clientOrder} /> : <Spinner />}
+            </Styled.ClientOrderContainer>
             <Styled.ButtonContainer>
               <Button text="I WANT TO ORDER" formId="confirmForm" />
             </Styled.ButtonContainer>

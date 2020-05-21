@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import * as Styled from './ClientOrder.styles'
 import { Order } from '../../types'
+import { decimal } from '../../utils'
 
 interface ClientOrder {
   order: Partial<Order>
@@ -17,9 +18,9 @@ export const ClientOrder: FC<ClientOrder> = ({ order }: ClientOrder) => {
       <Styled.Table>
         <Styled.TableHeadGroup>
           <Styled.TableRow>
-            <Styled.TableHead>Pizza</Styled.TableHead>
-            <Styled.TableHead>Prices</Styled.TableHead>
-            <Styled.TableHead>Amount</Styled.TableHead>
+            <Styled.TableHead>PIZZAS</Styled.TableHead>
+            <Styled.TableHead>PRICES</Styled.TableHead>
+            <Styled.TableHead>AMOUNT</Styled.TableHead>
           </Styled.TableRow>
         </Styled.TableHeadGroup>
         <Styled.TableBody>
@@ -31,7 +32,7 @@ export const ClientOrder: FC<ClientOrder> = ({ order }: ClientOrder) => {
               <Styled.TableRow key={product}>
                 <Styled.TableData>{order[product]!.name.toUpperCase()}</Styled.TableData>
                 <Styled.TableData>
-                  ${order[product]!.usdPrice} / €{order[product]!.eurPrice}
+                  ${order[product]!.usdPrice} <b>|</b> €{order[product]!.eurPrice}
                 </Styled.TableData>
                 <Styled.TableData>{order[product]!.amount}</Styled.TableData>
               </Styled.TableRow>
@@ -39,9 +40,11 @@ export const ClientOrder: FC<ClientOrder> = ({ order }: ClientOrder) => {
           })}
         </Styled.TableBody>
         <Styled.TableFooter>
-          <Styled.TableData colSpan={3}>
-            TOTAL PRICE: ${totalPrices.totalUsd} / €{totalPrices.totalEur}
-          </Styled.TableData>
+          <Styled.TableRow>
+            <Styled.TableData colSpan={3}>
+              TOTAL PRICE: ${decimal(totalPrices.totalUsd)} <b>|</b> €{decimal(totalPrices.totalEur)}
+            </Styled.TableData>
+          </Styled.TableRow>
         </Styled.TableFooter>
       </Styled.Table>
     </>

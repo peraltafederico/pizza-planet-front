@@ -1,23 +1,6 @@
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-export const Title = styled.h2`
-  color: ${(props): string => props.theme.colors.black};
-  align-self: flex-start;
-  margin-bottom: 8px;
-`
-
-export const OptionsContainer = styled.div`
-  position: relative;
-  width: 400px;
-`
-
-export const Container = styled.div`
-  height: 25px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-`
+import { media } from '../../theme/index'
 
 export const LessIcon = styled(FontAwesomeIcon)`
   color: ${(props): string => props.theme.colors.blue};
@@ -31,31 +14,12 @@ export const PlusIcon = styled(FontAwesomeIcon)`
   cursor: pointer;
 `
 
-export const NameContainer = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-`
-
-export const Name = styled.span`
-  color: ${(props): string => props.theme.colors.black};
-  font-size: 18px;
-`
-
-export const Amount = styled.span`
-  color: ${(props): string => props.theme.colors.black};
-  font-size: 18px;
-`
-
-export const AmountContainer = styled.div`
-  width: 75px;
-`
-
 export const Table = styled.table`
   border: 1px solid grey;
   background-color: #fff;
-  border-collapse: collapse;
   box-shadow: 0px 3px 9px 1px grey;
+  width: 100%;
+  border-collapse: collapse;
 `
 
 export const TableRow = styled.tr`
@@ -65,18 +29,31 @@ export const TableRow = styled.tr`
 `
 
 export const TableHeadGroup = styled.thead`
-  font-size: 35px;
+  font-size: ${(props): string => props.theme.fonts.title};
   background-color: #dddddd;
+
+  ${media.small} {
+    font-size: 15px;
+  }
 `
 
 export const TableHead = styled.th`
-  padding: 5px 25px;
+  padding: 15px 20px;
+
+  ${media.small} {
+    padding: 10px 5px;
+  }
 `
 
 export const TableBody = styled.tbody``
 
 export const TableData = styled.td`
   text-align: center;
-  font-size: 25px;
+  font-size: ${(props): string => props.theme.fonts.text};
   padding: 15px 0;
+
+  ${media.small} {
+    font-size: 12px;
+    padding: 10px 5px;
+  }
 `

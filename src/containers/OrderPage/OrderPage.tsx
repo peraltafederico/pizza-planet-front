@@ -56,22 +56,26 @@ export const OrderPage: FC = observer(() => {
   }
 
   const handleClickMinus = (name: string): void => {
-    setDefaultOrder({
-      ...defaultOrder,
-      [name]: {
-        ...defaultOrder[name],
-        amount: defaultOrder[name].amount - 1,
-      },
-    })
+    if (defaultOrder[name].amount - 1 >= 0) {
+      setDefaultOrder({
+        ...defaultOrder,
+        [name]: {
+          ...defaultOrder[name],
+          amount: defaultOrder[name].amount - 1,
+        },
+      })
+    }
   }
 
   const handleClickAccept = (): void => {
-    if (id) {
-      editOrder(clientOrder, id - 1)
-      history.push(`/order/${id}/confirm`)
-    } else {
-      addOrder(clientOrder)
-      history.push(`order/${orders.length + 1}/confirm`)
+    if (Object.keys(clientOrder).length > 0) {
+      if (id) {
+        editOrder(clientOrder, id - 1)
+        history.push(`/order/${id}/confirm`)
+      } else {
+        addOrder(clientOrder)
+        history.push(`order/${orders.length + 1}/confirm`)
+      }
     }
   }
 
@@ -79,13 +83,13 @@ export const OrderPage: FC = observer(() => {
     <Layout totalOrders={totalOrders}>
       {!loading ? (
         <>
-          <div>
+          <Styled.MenuContainer>
             <Menu
               order={defaultOrder}
               handleClickPlus={handleClickPlus}
               handleClickMinus={handleClickMinus}
             />
-          </div>
+          </Styled.MenuContainer>
           <Styled.OrderContainer>
             <ClientOrder order={clientOrder} />
           </Styled.OrderContainer>

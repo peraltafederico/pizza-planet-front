@@ -8,8 +8,8 @@ interface Layout {
 }
 
 export const Layout: FC<Layout> = ({ totalOrders, children }: Layout) => (
-  <div style={{ height: '100vh' }}>
+  <>
     <Header title="PIZZA PLANET!" counter={totalOrders} />
     <Styled.Content>{children}</Styled.Content>
-  </div>
+  </>
 )

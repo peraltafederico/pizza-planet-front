@@ -3,13 +3,12 @@ import { observer } from 'mobx-react-lite'
 import { merge, pick } from 'lodash'
 import shopStore from '../../store/shopStore'
 import { ShopCart } from '../../components/ShopCart'
-import { Header } from '../../components/Header'
-import { Section } from '../../components/Section'
 import { getDefaultOrder, getClientOrder } from '../../utils'
 import { Order } from '../../types'
 import { ApiService } from '../../services/apiService'
 import { Spinner } from '../../components/Spinner/Spinner.styles'
 import { Layout } from '../../components/Layout'
+import * as Styled from './ShopCartPage.styles'
 
 export const ShopCartPage = observer(() => {
   const { orders, totalOrders } = useContext(shopStore)
@@ -41,7 +40,7 @@ export const ShopCartPage = observer(() => {
   return (
     <>
       <Layout totalOrders={totalOrders}>
-        <div>
+        <Styled.ShopCartContainer>
           {!loading ? (
             <ShopCart orders={clientOrders} linkTo="/order" />
           ) : (
@@ -49,7 +48,7 @@ export const ShopCartPage = observer(() => {
               <Spinner />
             </div>
           )}
-        </div>
+        </Styled.ShopCartContainer>
       </Layout>
     </>
   )

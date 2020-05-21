@@ -1,6 +1,7 @@
 import { observable, action, computed, toJS, autorun } from 'mobx'
 import { createContext } from 'react'
 import { Order } from '../types'
+import { getOrderWithoutPrices } from '../utils'
 
 class ShopStore {
   constructor() {
@@ -21,11 +22,11 @@ class ShopStore {
   @observable shopCart: Partial<Order>[] = JSON.parse(localStorage.getItem('orders') || '[]')
 
   @action addOrder = (order: Partial<Order>): void => {
-    this.shopCart.push(order)
+    this.shopCart.push(getOrderWithoutPrices(order))
   }
 
   @action editOrder = (order: Partial<Order>, id: number): void => {
-    this.shopCart[id] = order
+    this.shopCart[id] = getOrderWithoutPrices(order)
   }
 
   @action removeOrder = (id: number): void => {

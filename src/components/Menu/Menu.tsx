@@ -14,10 +14,10 @@ export const Menu: FC<Menu> = ({ handleClickMinus, handleClickPlus, order }: Men
     <Styled.Table>
       <Styled.TableHeadGroup>
         <Styled.TableRow>
-          <Styled.TableHead>Pizzas</Styled.TableHead>
-          <Styled.TableHead>Prices</Styled.TableHead>
-          <Styled.TableHead>Amount</Styled.TableHead>
-          <Styled.TableHead>Change amount</Styled.TableHead>
+          <Styled.TableHead>PIZZAS</Styled.TableHead>
+          <Styled.TableHead>PRICES</Styled.TableHead>
+          <Styled.TableHead>AMOUNT</Styled.TableHead>
+          <Styled.TableHead>CHANGE AMOUNT</Styled.TableHead>
         </Styled.TableRow>
       </Styled.TableHeadGroup>
       <Styled.TableBody>
@@ -25,7 +25,7 @@ export const Menu: FC<Menu> = ({ handleClickMinus, handleClickPlus, order }: Men
           <Styled.TableRow key={product}>
             <Styled.TableData>{order[product].name.toUpperCase()}</Styled.TableData>
             <Styled.TableData>
-              ${order[product].usdPrice} / €{order[product].eurPrice}
+              ${order[product].usdPrice} <b>|</b> €{order[product].eurPrice}
             </Styled.TableData>
             <Styled.TableData>{order[product].amount}</Styled.TableData>
             <Styled.TableData>
