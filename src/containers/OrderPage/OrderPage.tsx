@@ -2,6 +2,7 @@ import React, { FC, useState, useContext, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { merge } from 'lodash'
+import axios from 'axios'
 import { Menu } from '../../components/Menu'
 import { ClientOrder } from '../../components/ClientOrder'
 import shopStore from '../../store/shopStore'
@@ -12,6 +13,7 @@ import { Spinner } from '../../components/Spinner'
 import { Layout } from '../../components/Layout'
 import { Button } from '../../components/Button'
 import * as Styled from './OrderPage.styles'
+import 'mobx-react-lite/batchingForReactDom'
 
 export const OrderPage: FC = observer(() => {
   const [defaultOrder, setDefaultOrder] = useState({} as Order)
@@ -22,8 +24,10 @@ export const OrderPage: FC = observer(() => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const source = axios.CancelToken.source()
+
     const fetchProducts = async (): Promise<void> => {
-      const { data } = await ApiService.getProducts()
+      const { data } = await ApiService.getProducts(source.token)
 
       if (id) {
         const clientOrder = orders[id - 1]
@@ -43,6 +47,8 @@ export const OrderPage: FC = observer(() => {
     }
 
     fetchProducts()
+
+    return (): void => source.cancel()
   }, [id, orders, history])
 
   const handleClickPlus = (name: string): void => {

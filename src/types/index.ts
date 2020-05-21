@@ -18,4 +18,11 @@ export interface ClientData {
   name: string
   phone: string
   address: string
+  email: string
+  currency: CurrencyEnum
+}
+
+export enum CurrencyEnum {
+  usd = 'usd',
+  eur = 'eur',
 }

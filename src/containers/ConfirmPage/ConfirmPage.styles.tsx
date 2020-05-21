@@ -29,3 +29,9 @@ export const ButtonContainer = styled.div`
   min-width: 100%;
   margin-top: 50px;
 `
+
+export const NotificationContainer = styled.div`
+  display: 'flex';
+  flex-direction: 'column';
+  align-items: 'center';
+`

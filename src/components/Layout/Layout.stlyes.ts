@@ -3,14 +3,18 @@ import { media } from '../../theme/index'
 
 export const Content = styled.div`
   display: flex;
-  padding: 50px 40px;
+  margin: 120px 40px 20px 40px;
   flex-wrap: wrap;
   height: calc(100% - 65px);
   box-sizing: border-box;
-
+  justify-content: center;
 
   ${media.large} {
-    padding: 20px 20px;
+    margin: 120px 20px;
     flex-direction: column;
+  }
+
+  ${media.small} {
+    margin: 85px 20px;
   }
 `

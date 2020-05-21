@@ -42,7 +42,8 @@ export const ClientOrder: FC<ClientOrder> = ({ order }: ClientOrder) => {
         <Styled.TableFooter>
           <Styled.TableRow>
             <Styled.TableData colSpan={3}>
-              TOTAL PRICE: ${decimal(totalPrices.totalUsd)} <b>|</b> €{decimal(totalPrices.totalEur)}
+              TOTAL PRICE: ${decimal(totalPrices.totalUsd)} <b>|</b> €
+              {decimal(totalPrices.totalEur)}
             </Styled.TableData>
           </Styled.TableRow>
         </Styled.TableFooter>

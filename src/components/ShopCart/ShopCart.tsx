@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
 import * as Styled from './ShopCart.styles'
 import { ClientOrder } from '../ClientOrder'
 import { Order } from '../../types'

@@ -1,25 +1,33 @@
 import React, { FC } from 'react'
 import * as Styled from './ConfirmForm.styles'
-import { Input } from './Input'
+import { Input, Select } from './InputElement'
 import { ClientData } from '../../types'
 
 interface ConfirmForm {
-  onChange: (event: React.FormEvent<HTMLInputElement>) => void
+  onChange: (
+    event: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
+  ) => void
   data: ClientData
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+  currencies: { name: string; value: string }[]
 }
 
-export const ConfirmForm: FC<ConfirmForm> = ({ onChange, data, onSubmit }: ConfirmForm) => (
+export const ConfirmForm: FC<ConfirmForm> = ({
+  onChange,
+  data,
+  onSubmit,
+  currencies,
+}: ConfirmForm) => (
   <Styled.Form id="confirmForm" onSubmit={onSubmit}>
     <Styled.InputContainer>
       <Input
         onChange={onChange}
-        label="Name"
+        label="NAME"
         inputProps={{ name: 'name', placeholder: 'My Name', value: data.name, required: true }}
       />
       <Input
         onChange={onChange}
-        label="Phone"
+        label="PHONE"
         inputProps={{
           name: 'phone',
           placeholder: '01160040960',
@@ -29,7 +37,7 @@ export const ConfirmForm: FC<ConfirmForm> = ({ onChange, data, onSubmit }: Confi
       />
       <Input
         onChange={onChange}
-        label="Address"
+        label="ADDRESS"
         inputProps={{
           name: 'address',
           placeholder: 'Address 1225',
@@ -39,14 +47,16 @@ export const ConfirmForm: FC<ConfirmForm> = ({ onChange, data, onSubmit }: Confi
       />
       <Input
         onChange={onChange}
-        label="Email"
+        label="EMAIL"
         inputProps={{
           name: 'email',
           placeholder: 'myemail@gmail.com',
-          value: data.address,
+          value: data.email,
           required: true,
+          type: 'email',
         }}
       />
+      <Select onChange={onChange} label="CURRENCY" options={currencies} name="currency" />
     </Styled.InputContainer>
   </Styled.Form>
 )

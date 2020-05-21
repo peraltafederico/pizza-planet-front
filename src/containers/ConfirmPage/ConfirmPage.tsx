@@ -2,9 +2,10 @@ import React, { FC, useState, useContext, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { merge } from 'lodash'
+import axios from 'axios'
 import { ConfirmForm } from '../../components/ConfirmForm'
-import { ClientData, Order } from '../../types'
 import shopStore from '../../store/shopStore'
+import { ClientData, Order } from '../../types'
 import { ClientOrder } from '../../components/ClientOrder'
 import { getDefaultOrder, getClientOrder } from '../../utils'
 import { ApiService } from '../../services/apiService'
@@ -12,9 +13,10 @@ import { Spinner } from '../../components/Spinner/Spinner.styles'
 import { Layout } from '../../components/Layout'
 import { Button } from '../../components/Button'
 import * as Styled from './ConfirmPage.styles'
+import 'mobx-react-lite/batchingForReactDom'
 
 export const ConfirmPage: FC = observer(() => {
-  const [clientData, setClientData] = useState({} as ClientData)
+  const [clientData, setClientData] = useState({ currency: 'eur' } as ClientData)
   const [clientOrder, setClientOrder] = useState({} as Partial<Order>)
   const history = useHistory()
   const { totalOrders, orders, removeOrder } = useContext(shopStore)
@@ -22,7 +24,9 @@ export const ConfirmPage: FC = observer(() => {
   const [loading, setLoading] = useState(true)
   const [done, setDone] = useState(false)
 
-  const handleOnChangeForm = (event: React.FormEvent<HTMLInputElement>): void => {
+  const handleOnChangeForm = (
+    event: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
+  ): void => {
     setClientData({
       ...clientData,
       [event.currentTarget.name]: event.currentTarget.value,
@@ -31,9 +35,10 @@ export const ConfirmPage: FC = observer(() => {
 
   useEffect(() => {
     const clientOrder = orders[id - 1]
+    const source = axios.CancelToken.source()
 
     const fetchProducts = async (): Promise<void> => {
-      const { data } = await ApiService.getProductsByIds(Object.keys(clientOrder))
+      const { data } = await ApiService.getProductsByIds(Object.keys(clientOrder), source.token)
 
       if (clientOrder) {
         const updatedDefaultOrder = merge(getDefaultOrder(data), clientOrder)
@@ -47,16 +52,29 @@ export const ConfirmPage: FC = observer(() => {
     }
 
     fetchProducts()
+
+    return (): void => source.cancel()
   }, [id, orders, history])
 
   useEffect(() => {
+    const source = axios.CancelToken.source()
+
     const sendOrder = async (): Promise<void> => {
+      const products = Object.keys(orders[id - 1]).map((productId) => ({
+        id: parseInt(productId, 10),
+        amount: clientOrder[productId]!.amount,
+        buyingPrice:
+          clientData.currency === 'usd'
+            ? clientOrder[productId]!.usdPrice
+            : clientOrder[productId]!.eurPrice,
+      }))
+
       const data = {
         ...clientData,
-        products: Object.keys(clientOrder),
+        products,
       }
 
-      await ApiService.sendOrder(data)
+      await ApiService.sendOrder(data, source.token)
     }
 
     if (done) {
@@ -65,9 +83,11 @@ export const ConfirmPage: FC = observer(() => {
       setTimeout(() => {
         history.replace('/order')
         removeOrder(id - 1)
-      }, 1600)
+      }, 2000)
     }
-  }, [id, removeOrder, done, clientOrder, clientData, history])
+
+    return (): void => source.cancel()
+  }, [id, removeOrder, done, clientOrder, clientData, history, orders])
 
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
@@ -85,6 +105,10 @@ export const ConfirmPage: FC = observer(() => {
                 onChange={handleOnChangeForm}
                 data={clientData}
                 onSubmit={handleSubmitForm}
+                currencies={[
+                  { name: 'Euro', value: 'eur' },
+                  { name: 'Dolares', value: 'usd' },
+                ]}
               />
             </Styled.ConfirmFormContainer>
             <Styled.ClientOrderContainer>
@@ -96,7 +120,12 @@ export const ConfirmPage: FC = observer(() => {
           </Layout>
         </>
       ) : (
-        <div>completado</div>
+        <Layout totalOrders={totalOrders}>
+          <Styled.NotificationContainer>
+            <h1>YOUR ORDER HAS BEEN RECEIVED.</h1>
+            <h3>REDIRECTING...</h3>
+          </Styled.NotificationContainer>
+        </Layout>
       )}
     </>
   )

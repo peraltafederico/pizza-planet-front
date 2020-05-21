@@ -9,6 +9,11 @@ export const Button = styled.button`
   border-radius: 25px;
   box-shadow: ${(props): string => `0px 0px 8px 0.5px ${props.theme.colors.black}`};
   border-color: transparent;
+  transition: all 200ms ease;
+
+  &:hover {
+    padding: 28px 60px;
+  }
 
   ${media.small} {
     padding: 10px 15px;
@@ -19,10 +24,6 @@ export const Text = styled.span`
   color: ${(props): string => props.theme.colors.black};
   font-weight: bold;
   font-size: ${(props): string => props.theme.fonts.title};
-  &:hover {
-    color: ${(props): string => props.theme.colors.white};
-    padding: 60px;
-  }
 
   ${media.small} {
     font-size: 12px;
