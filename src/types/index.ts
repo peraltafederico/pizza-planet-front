@@ -1,16 +1,16 @@
 export interface Product {
   id: number
   name: string
-  usdPrice: number
-  eurPrice: number
+  usdPrice: string
+  eurPrice: string
 }
 
 export interface Order {
   [name: string]: {
     name: string
     amount: number
-    usdPrice: number
-    eurPrice: number
+    usdPrice: any
+    eurPrice: any
   }
 }
 
@@ -19,5 +19,3 @@ export interface ClientData {
   phone: string
   address: string
 }
-
-export type SectionVariant = 'green' | 'lightGreen'

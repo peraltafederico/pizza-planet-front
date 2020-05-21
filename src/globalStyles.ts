@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: #fff;
+    background-color: ${(props): string => props.theme.colors.lightGreen};
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -10,7 +10,6 @@ const GlobalStyle = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* overflow: hidden; */
   }
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -21,6 +20,15 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     display: flex;
     flex-direction: column
+  }
+
+  a {
+    text-decoration: none;
+    color: unset;
+
+    :hover {
+      color: red;
+    }
   }
 `
 export default GlobalStyle

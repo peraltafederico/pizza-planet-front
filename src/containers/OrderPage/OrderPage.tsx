@@ -2,15 +2,16 @@ import React, { FC, useState, useContext, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { merge } from 'lodash'
-import { Header } from '../../components/Header'
 import { Menu } from '../../components/Menu'
 import { ClientOrder } from '../../components/ClientOrder'
 import shopStore from '../../store/shopStore'
-import { Section } from '../../components/Section'
 import { getDefaultOrder, getClientOrder } from '../../utils'
 import { Order } from '../../types'
 import { ApiService } from '../../services/apiService'
 import { Spinner } from '../../components/Spinner'
+import { Layout } from '../../components/Layout'
+import { Button } from '../../components/Button'
+import * as Styled from './OrderPage.styles'
 
 export const OrderPage: FC = observer(() => {
   const [defaultOrder, setDefaultOrder] = useState({} as Order)
@@ -55,46 +56,52 @@ export const OrderPage: FC = observer(() => {
   }
 
   const handleClickMinus = (name: string): void => {
-    setDefaultOrder({
-      ...defaultOrder,
-      [name]: {
-        ...defaultOrder[name],
-        amount: defaultOrder[name].amount - 1,
-      },
-    })
+    if (defaultOrder[name].amount - 1 >= 0) {
+      setDefaultOrder({
+        ...defaultOrder,
+        [name]: {
+          ...defaultOrder[name],
+          amount: defaultOrder[name].amount - 1,
+        },
+      })
+    }
   }
 
   const handleClickAccept = (): void => {
-    if (id) {
-      editOrder(clientOrder, id - 1)
-      history.push(`/order/${id}/confirm`)
-    } else {
-      addOrder(clientOrder)
-      history.push(`order/${orders.length + 1}/confirm`)
+    if (Object.keys(clientOrder).length > 0) {
+      if (id) {
+        editOrder(clientOrder, id - 1)
+        history.push(`/order/${id}/confirm`)
+      } else {
+        addOrder(clientOrder)
+        history.push(`order/${orders.length + 1}/confirm`)
+      }
     }
   }
 
   return (
-    <>
-      <Header title="PIZZA PLANET!" counter={totalOrders} />
-      <Section variant="lightGreen" title="MENU">
-        {!loading ? (
-          <Menu
-            order={defaultOrder}
-            handleClickPlus={handleClickPlus}
-            handleClickMinus={handleClickMinus}
-          />
-        ) : (
+    <Layout totalOrders={totalOrders}>
+      {!loading ? (
+        <>
+          <Styled.MenuContainer>
+            <Menu
+              order={defaultOrder}
+              handleClickPlus={handleClickPlus}
+              handleClickMinus={handleClickMinus}
+            />
+          </Styled.MenuContainer>
+          <Styled.OrderContainer>
+            <ClientOrder order={clientOrder} />
+          </Styled.OrderContainer>
+          <Styled.ButtonContainer>
+            <Button text="CONTINUE" onClick={handleClickAccept} />
+          </Styled.ButtonContainer>
+        </>
+      ) : (
+        <div>
           <Spinner />
-        )}
-      </Section>
-      <Section variant="green" title="YOUR ORDER">
-        {!loading ? (
-          <ClientOrder order={clientOrder} onClickAccept={handleClickAccept} />
-        ) : (
-          <Spinner />
-        )}
-      </Section>
-    </>
+        </div>
+      )}
+    </Layout>
   )
 })

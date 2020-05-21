@@ -2,15 +2,16 @@ import React, { FC, useState, useContext, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { merge } from 'lodash'
-import { Header } from '../../components/Header'
 import { ConfirmForm } from '../../components/ConfirmForm'
 import { ClientData, Order } from '../../types'
 import shopStore from '../../store/shopStore'
-import { Section } from '../../components/Section'
 import { ClientOrder } from '../../components/ClientOrder'
-import { getDefaultOrder } from '../../utils'
+import { getDefaultOrder, getClientOrder } from '../../utils'
 import { ApiService } from '../../services/apiService'
 import { Spinner } from '../../components/Spinner/Spinner.styles'
+import { Layout } from '../../components/Layout'
+import { Button } from '../../components/Button'
+import * as Styled from './ConfirmPage.styles'
 
 export const ConfirmPage: FC = observer(() => {
   const [clientData, setClientData] = useState({} as ClientData)
@@ -37,7 +38,7 @@ export const ConfirmPage: FC = observer(() => {
       if (clientOrder) {
         const updatedDefaultOrder = merge(getDefaultOrder(data), clientOrder)
 
-        setClientOrder(updatedDefaultOrder)
+        setClientOrder(getClientOrder(updatedDefaultOrder))
       } else {
         history.push('/order')
       }
@@ -68,7 +69,9 @@ export const ConfirmPage: FC = observer(() => {
     }
   }, [id, removeOrder, done, clientOrder, clientData, history])
 
-  const handleClickConfirm = (): void => {
+  const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault()
+
     setDone(true)
   }
 
@@ -76,17 +79,21 @@ export const ConfirmPage: FC = observer(() => {
     <>
       {!done ? (
         <>
-          <Header title="PIZZA PLANET!" counter={totalOrders} />
-          <Section variant="lightGreen" title="CONFIRM FORM">
-            <ConfirmForm
-              onChange={handleOnChangeForm}
-              data={clientData}
-              onClickAccept={handleClickConfirm}
-            />
-          </Section>
-          <Section variant="green" title="YOUR ORDER">
-            {!loading ? <ClientOrder order={clientOrder} hideButton={true} /> : <Spinner />}
-          </Section>
+          <Layout totalOrders={totalOrders}>
+            <Styled.ConfirmFormContainer>
+              <ConfirmForm
+                onChange={handleOnChangeForm}
+                data={clientData}
+                onSubmit={handleSubmitForm}
+              />
+            </Styled.ConfirmFormContainer>
+            <Styled.ClientOrderContainer>
+              {!loading ? <ClientOrder order={clientOrder} /> : <Spinner />}
+            </Styled.ClientOrderContainer>
+            <Styled.ButtonContainer>
+              <Button text="I WANT TO ORDER" formId="confirmForm" />
+            </Styled.ButtonContainer>
+          </Layout>
         </>
       ) : (
         <div>completado</div>

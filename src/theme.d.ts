@@ -10,5 +10,9 @@ declare module 'styled-components' {
       blue: string
       red: string
     }
+    fonts: {
+      title: string
+      text: string
+    }
   }
 }

@@ -1,19 +1,13 @@
 import React, { FC } from 'react'
 import * as Styled from './ClientOrder.styles'
-import { Button } from '../Button'
 import { Order } from '../../types'
+import { decimal } from '../../utils'
 
 interface ClientOrder {
   order: Partial<Order>
-  onClickAccept?: () => void
-  hideButton?: boolean
 }
 
-export const ClientOrder: FC<ClientOrder> = ({
-  order,
-  onClickAccept = (): void => {},
-  hideButton,
-}: ClientOrder) => {
+export const ClientOrder: FC<ClientOrder> = ({ order }: ClientOrder) => {
   const totalPrices = {
     totalUsd: 0,
     totalEur: 0,
@@ -21,40 +15,38 @@ export const ClientOrder: FC<ClientOrder> = ({
 
   return (
     <>
-      {Object.keys(order).map((product) => {
-        totalPrices.totalEur += order[product]!.eurPrice
-        totalPrices.totalUsd += order[product]!.usdPrice
+      <Styled.Table>
+        <Styled.TableHeadGroup>
+          <Styled.TableRow>
+            <Styled.TableHead>PIZZAS</Styled.TableHead>
+            <Styled.TableHead>PRICES</Styled.TableHead>
+            <Styled.TableHead>AMOUNT</Styled.TableHead>
+          </Styled.TableRow>
+        </Styled.TableHeadGroup>
+        <Styled.TableBody>
+          {Object.keys(order).map((product) => {
+            totalPrices.totalEur += order[product]!.eurPrice
+            totalPrices.totalUsd += order[product]!.usdPrice
 
-        return (
-          <Styled.ItemsContainer key={product}>
-            <Styled.NameContainer>
-              <Styled.Name>{order[product]!.name}</Styled.Name>
-            </Styled.NameContainer>
-            <Styled.AmountContainer>
-              <Styled.Name>* {order[product]!.amount}</Styled.Name>
-            </Styled.AmountContainer>
-            <Styled.PriceContainer>
-              <Styled.Price>
-                ${order[product]!.usdPrice} / €{order[product]!.eurPrice}
-              </Styled.Price>
-            </Styled.PriceContainer>
-          </Styled.ItemsContainer>
-        )
-      })}
-      <Styled.TotalContainer>
-        <Styled.Total>
-          TOTAL PRICE: ${totalPrices.totalUsd} / €{totalPrices.totalEur}
-        </Styled.Total>
-      </Styled.TotalContainer>
-      {!hideButton && (
-        <Styled.ButtonContainer>
-          <Button text="ACCEPT" onClick={onClickAccept} />
-        </Styled.ButtonContainer>
-      )}
+            return (
+              <Styled.TableRow key={product}>
+                <Styled.TableData>{order[product]!.name.toUpperCase()}</Styled.TableData>
+                <Styled.TableData>
+                  ${order[product]!.usdPrice} <b>|</b> €{order[product]!.eurPrice}
+                </Styled.TableData>
+                <Styled.TableData>{order[product]!.amount}</Styled.TableData>
+              </Styled.TableRow>
+            )
+          })}
+        </Styled.TableBody>
+        <Styled.TableFooter>
+          <Styled.TableRow>
+            <Styled.TableData colSpan={3}>
+              TOTAL PRICE: ${decimal(totalPrices.totalUsd)} <b>|</b> €{decimal(totalPrices.totalEur)}
+            </Styled.TableData>
+          </Styled.TableRow>
+        </Styled.TableFooter>
+      </Styled.Table>
     </>
   )
-}
-
-ClientOrder.defaultProps = {
-  hideButton: false,
 }
